@@ -28,6 +28,9 @@
     ],
     "peerDependencies": {
         "react": ">=16.8.0",
+        "@mui/material": "latest",
+        "@emotion/react": "latest",
+        "@emotion/styled": "latest",
         "@types/react": ">=16.8.0"
     },
     "peerDependenciesMeta": {
