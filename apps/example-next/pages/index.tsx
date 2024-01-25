@@ -21,7 +21,23 @@ export default function Home() {
         </Typography>
       </Box>
       <Stack alignItems="center" gap={5}>
-        <Button variant="contained" onClick={() => toast("Second Node")}>
+        <Button
+          variant="contained"
+          onClick={() =>
+            // toast("Save Successful", {
+            //   severity: "success",
+            //   description: "Your item has been saved.",
+            //   closeButton: true,
+            //   // action: {
+            //   //   label: "Undo",
+            //   //   onClick: () => {
+            //   //     console.log("Undo");
+            //   //   },
+            //   // },
+            // })
+            toast.loading("Saving")
+          }
+        >
           Toast
         </Button>
       </Stack>

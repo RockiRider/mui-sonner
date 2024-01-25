@@ -1,4 +1,4 @@
-import React, { isValidElement } from "react";
+import React from "react";
 import {
   useState,
   useRef,
@@ -11,13 +11,15 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
-import { Loader, getAsset } from "./assets";
+import { Loader } from "./assets";
 import {
   ToastT,
   HeightT,
   Position,
   ToastClassnames,
-  ToastTypes,
+  // ToastTypes,
+  ToastSeverity,
+  ToastVariant,
 } from "./types";
 import {
   GAP,
@@ -25,6 +27,7 @@ import {
   TIME_BEFORE_UNMOUNT,
   TOAST_LIFETIME,
 } from "./constants";
+import { Alert, AlertTitle, Button, Typography } from "@mui/material";
 
 function cn(...classes: (string | undefined)[]) {
   return classes.filter(Boolean).join(" ");
@@ -55,35 +58,40 @@ interface ToastProps {
   loadingIcon?: ReactNode;
   classNames?: ToastClassnames;
   closeButtonAriaLabel?: string;
+  severity?: ToastSeverity;
+  color?: ToastSeverity;
+  variant?: ToastVariant;
 }
 
-export const Toast = (props: ToastProps) => {
-  const {
-    invert: ToasterInvert,
-    toast,
-    unstyled,
-    interacting,
-    setHeights,
-    visibleToasts,
-    heights,
-    index,
-    toasts,
-    expanded,
-    removeToast,
-    closeButton: closeButtonFromToaster,
-    style,
-    cancelButtonStyle,
-    actionButtonStyle,
-    className = "",
-    descriptionClassName = "",
-    duration: durationFromToaster,
-    position,
-    gap = GAP,
-    loadingIcon: loadingIconProp,
-    expandByDefault,
-    classNames,
-    closeButtonAriaLabel = "Close toast",
-  } = props;
+export const Toast = ({
+  invert: ToasterInvert,
+  toast,
+  unstyled,
+  interacting,
+  setHeights,
+  visibleToasts,
+  heights,
+  index,
+  toasts,
+  expanded,
+  removeToast,
+  closeButton: closeButtonFromToaster,
+  style,
+  cancelButtonStyle,
+  actionButtonStyle,
+  className = "",
+  descriptionClassName = "",
+  duration: durationFromToaster,
+  position,
+  gap = GAP,
+  loadingIcon: loadingIconProp,
+  expandByDefault,
+  classNames,
+  closeButtonAriaLabel = "Close toast",
+  severity = "info",
+  variant = "filled",
+  color,
+}: ToastProps) => {
   const [mounted, setMounted] = useState(false);
   const [removed, setRemoved] = useState(false);
   const [swiping, setSwiping] = useState(false);
@@ -310,6 +318,7 @@ export const Toast = (props: ToastProps) => {
           "--initial-height": expandByDefault ? "auto" : `${initialHeight}px`,
           ...style,
           ...toast.style,
+          padding: 0,
         } as React.CSSProperties
       }
       onPointerDown={(event) => {
@@ -371,60 +380,75 @@ export const Toast = (props: ToastProps) => {
         }
       }}
     >
-      {closeButton && !toast.jsx ? (
-        <button
-          aria-label={closeButtonAriaLabel}
-          data-disabled={disabled}
-          data-close-button
-          onClick={
-            disabled || !dismissible
-              ? () => {}
-              : () => {
-                  deleteToast();
-                  toast.onDismiss?.(toast);
-                }
-          }
-          className={cn(
-            classNames?.closeButton,
-            toast?.classNames?.closeButton
-          )}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="12"
-            height="12"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+      <Alert
+        sx={{ width: "100%" }}
+        severity={severity}
+        icon={toast.icon}
+        variant={variant}
+        color={color}
+        action={
+          toast.action ? (
+            <Button
+              style={toast.actionButtonStyle || actionButtonStyle}
+              onClick={(event) => {
+                toast.action?.onClick(event);
+                if (event.defaultPrevented) return;
+                deleteToast();
+              }}
+              className={cn(
+                classNames?.actionButton,
+                toast?.classNames?.actionButton
+              )}
+            >
+              {toast.action.label}
+            </Button>
+          ) : undefined
+        }
+      >
+        {closeButton && (
+          <button
+            aria-label={closeButtonAriaLabel}
+            data-disabled={disabled}
+            data-close-button
+            onClick={
+              disabled || !dismissible
+                ? () => {}
+                : () => {
+                    deleteToast();
+                    toast.onDismiss?.(toast);
+                  }
+            }
+            className={cn(
+              classNames?.closeButton,
+              toast?.classNames?.closeButton
+            )}
           >
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-      ) : null}
-      {toast.jsx || isValidElement(toast.title) ? (
-        toast.jsx || toast.title
-      ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        )}
+        {toast.title && <AlertTitle>{toast.title}</AlertTitle>}
         <>
-          {toastType || toast.icon || toast.promise ? (
+          {toast.icon || toast.promise ? (
             <div data-icon="">
               {(toast.promise || toast.type === "loading") && !toast.icon
                 ? getLoadingIcon()
                 : null}
-              {toast.icon || getAsset(toastType as ToastTypes)}
             </div>
           ) : null}
-
           <div data-content="">
-            <div
-              data-title=""
-              className={cn(classNames?.title, toast?.classNames?.title)}
-            >
-              {toast.title}
-            </div>
             {toast.description ? (
               <div
                 data-description=""
@@ -435,7 +459,7 @@ export const Toast = (props: ToastProps) => {
                   toast?.classNames?.description
                 )}
               >
-                {toast.description}
+                <Typography>{toast.description}</Typography>
               </div>
             ) : null}
           </div>
@@ -459,25 +483,8 @@ export const Toast = (props: ToastProps) => {
               {toast.cancel.label}
             </button>
           ) : null}
-          {toast.action ? (
-            <button
-              data-button=""
-              style={toast.actionButtonStyle || actionButtonStyle}
-              onClick={(event) => {
-                toast.action?.onClick(event);
-                if (event.defaultPrevented) return;
-                deleteToast();
-              }}
-              className={cn(
-                classNames?.actionButton,
-                toast?.classNames?.actionButton
-              )}
-            >
-              {toast.action.label}
-            </button>
-          ) : null}
         </>
-      )}
+      </Alert>
     </li>
   );
 };

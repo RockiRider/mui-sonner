@@ -1,7 +1,9 @@
 import { ReactNode } from "react";
 import { AlertColor } from "@mui/material";
 
-export type NewToastTypes = AlertColor;
+export type ToastSeverity = AlertColor;
+export type ToastColor = ToastSeverity;
+export type ToastVariant = "filled" | "outlined";
 export type ToastTypes =
   | "normal"
   | "action"
@@ -43,6 +45,9 @@ export interface ToastClassnames {
 export interface ToastT {
   id: number | string;
   title?: string | ReactNode;
+  severity?: ToastSeverity;
+  color?: ToastColor;
+  variant?: ToastVariant;
   type?: ToastTypes;
   icon?: ReactNode;
   jsx?: ReactNode;
@@ -87,7 +92,7 @@ export interface HeightT {
   position: Position;
 }
 
-interface ToastOptions {
+export type ToastOptions = {
   className?: string;
   closeButton?: boolean;
   descriptionClassName?: string;
@@ -97,27 +102,7 @@ interface ToastOptions {
   duration?: number;
   unstyled?: boolean;
   classNames?: ToastClassnames;
-}
-
-export interface ToasterProps {
-  invert?: boolean;
-  theme?: "light" | "dark" | "system";
-  position?: Position;
-  hotkey?: string[];
-  richColors?: boolean;
-  expand?: boolean;
-  duration?: number;
-  gap?: number;
-  visibleToasts?: number;
-  closeButton?: boolean;
-  toastOptions?: ToastOptions;
-  className?: string;
-  style?: React.CSSProperties;
-  offset?: string | number;
-  dir?: "rtl" | "ltr" | "auto";
-  loadingIcon?: ReactNode;
-  containerAriaLabel?: string;
-}
+};
 
 export enum SwipeStateTypes {
   SwipedOut = "SwipedOut",

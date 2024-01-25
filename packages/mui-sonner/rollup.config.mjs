@@ -15,7 +15,7 @@ const config = defineConfig([
         outDir: "dist",
       }),
     ],
-    external: ["react", "react-dom"],
+    external: ["react", "react-dom", "@mui/material"],
   },
 ]);
 

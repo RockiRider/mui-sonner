@@ -1,5 +1,6 @@
 import React, {
   CSSProperties,
+  ReactNode,
   useCallback,
   useEffect,
   useMemo,
@@ -16,11 +17,11 @@ import {
 } from "./constants";
 import { ToastState } from "./state";
 import {
-  ToasterProps,
   ToastT,
   HeightT,
   ToastToDismiss,
   Position,
+  ToastOptions,
 } from "./types";
 
 function getDocumentDirection(): ToasterProps["dir"] {
@@ -37,6 +38,24 @@ function getDocumentDirection(): ToasterProps["dir"] {
   return dirAttribute as ToasterProps["dir"];
 }
 
+interface ToasterProps {
+  invert?: boolean;
+  position?: Position;
+  hotkey?: string[];
+  expand?: boolean;
+  duration?: number;
+  gap?: number;
+  visibleToasts?: number;
+  closeButton?: boolean;
+  toastOptions?: ToastOptions;
+  className?: string;
+  style?: React.CSSProperties;
+  offset?: string | number;
+  dir?: "rtl" | "ltr" | "auto";
+  loadingIcon?: ReactNode;
+  containerAriaLabel?: string;
+}
+
 export const Toaster = ({
   invert = false,
   position = "bottom-right",
@@ -45,8 +64,6 @@ export const Toaster = ({
   closeButton = false,
   className,
   offset,
-  theme = "light",
-  richColors,
   duration,
   style,
   visibleToasts = VISIBLE_TOASTS_AMOUNT,
@@ -74,16 +91,6 @@ export const Toaster = ({
   const [heights, setHeights] = useState<HeightT[]>([]);
   const [expanded, setExpanded] = useState(false);
   const [interacting, setInteracting] = useState(false);
-  const [actualTheme, setActualTheme] = useState(
-    theme !== "system"
-      ? theme
-      : typeof window !== "undefined"
-        ? window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light"
-        : "light"
-  );
 
   const listRef = useRef<HTMLOListElement>(null);
   const hotkeyLabel = hotkey
@@ -132,39 +139,6 @@ export const Toaster = ({
       });
     });
   }, []);
-
-  useEffect(() => {
-    if (theme !== "system") {
-      setActualTheme(theme);
-      return;
-    }
-
-    if (theme === "system") {
-      // check if current preference is dark
-      if (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ) {
-        // it's currently dark
-        setActualTheme("dark");
-      } else {
-        // it's not dark
-        setActualTheme("light");
-      }
-    }
-
-    if (typeof window === "undefined") return;
-
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", ({ matches }) => {
-        if (matches) {
-          setActualTheme("dark");
-        } else {
-          setActualTheme("light");
-        }
-      });
-  }, [theme]);
 
   useEffect(() => {
     // Ensure expanded is always false when no toasts are present / only one left
@@ -224,8 +198,6 @@ export const Toaster = ({
             ref={listRef}
             className={className}
             data-sonner-toaster
-            data-theme={actualTheme}
-            data-rich-colors={richColors}
             data-y-position={y}
             data-x-position={x}
             style={
@@ -315,6 +287,9 @@ export const Toaster = ({
                   gap={gap}
                   loadingIcon={loadingIcon}
                   expanded={expanded}
+                  severity={toast.severity}
+                  color={toast.color}
+                  variant={toast.variant}
                 />
               ))}
           </ol>
