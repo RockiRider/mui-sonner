@@ -283,7 +283,6 @@ export const Toast = ({
       data-front={isFront}
       data-swiping={swiping}
       data-dismissible={dismissible}
-      data-type={toastType}
       data-invert={invert}
       data-swipe-out={swipeOut}
       data-expanded={Boolean(expanded || (expandByDefault && mounted))}
