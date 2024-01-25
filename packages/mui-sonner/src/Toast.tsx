@@ -366,6 +366,7 @@ export const Toast = ({
         action={
           toast.action ? (
             <Button
+              variant="contained"
               style={toast.actionButtonStyle || actionButtonStyle}
               onClick={(event) => {
                 toast.action?.onClick(event);
@@ -410,25 +411,26 @@ export const Toast = ({
         )}
         {toast.title && <AlertTitle>{toast.title}</AlertTitle>}
         <>
-          {toast.icon || toast.promise ? (
-            <div data-icon="">
-              {(toast.promise || toast.type === "loading") && !toast.icon
+          {toast.promise && (
+            <>
+              {toast.promise || toast.type === "loading"
                 ? getLoadingIcon()
                 : null}
-            </div>
-          ) : null}
+            </>
+          )}
           <div data-content="">
-            {toast.description ? (
+            {toast.description && (
               <div data-description="">
                 <Typography>{toast.description}</Typography>
               </div>
-            ) : null}
+            )}
           </div>
-          {toast.cancel ? (
-            <button
-              data-button
-              data-cancel
-              style={toast.cancelButtonStyle || cancelButtonStyle}
+          {toast.cancel && (
+            <Button
+              variant="contained"
+              // data-button
+              // data-cancel
+              // style={toast.cancelButtonStyle || cancelButtonStyle}
               onClick={(event) => {
                 if (!dismissible) return;
                 deleteToast();
@@ -438,8 +440,8 @@ export const Toast = ({
               }}
             >
               {toast.cancel.label}
-            </button>
-          ) : null}
+            </Button>
+          )}
         </>
       </Alert>
     </li>

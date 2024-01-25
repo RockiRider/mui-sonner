@@ -27,7 +27,14 @@ export default function Home() {
         <Button variant="contained" onClick={() => toast.success("Success")}>
           Success
         </Button>
-        <Button variant="contained" onClick={() => toast.error("Error")}>
+        <Button
+          variant="contained"
+          onClick={() =>
+            toast.error("Error", {
+              variant: "outlined",
+            })
+          }
+        >
           Error
         </Button>
         <Button
@@ -35,7 +42,6 @@ export default function Home() {
             toast("Save Successful", {
               severity: "success",
               description: "Your item has been saved.",
-              closeButton: true,
               action: {
                 label: "Undo",
                 onClick: () => {
