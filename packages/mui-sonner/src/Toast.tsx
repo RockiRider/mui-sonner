@@ -17,7 +17,6 @@ import {
   HeightT,
   Position,
   ToastClassnames,
-  // ToastTypes,
   ToastSeverity,
   ToastVariant,
 } from "./types";

@@ -12,6 +12,12 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "example-vite#dev": {
+      "dependsOn": ["^mui-sonner#build"]
+    },
+    "example-next#dev": {
+      "dependsOn": ["^mui-sonner#build"]
     }
   }
 }

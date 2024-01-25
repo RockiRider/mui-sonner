@@ -2,8 +2,9 @@
   "name": "mui-sonner",
   "private": true,
   "scripts": {
-    "build": "turbo build --filter=mui-sonner",
-    "dev": "turbo dev --filter=example-next",
+    "build": "turbo build --filter=mui-sonner --force",
+    "n:dev": "turbo dev --filter=example-next",
+    "v:dev": "turbo dev --filter=example-vite",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
