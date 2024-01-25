@@ -2,11 +2,13 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import { toast } from "mui-sonner";
-import { Button, Stack } from "@mui/material";
+import { Button, CssBaseline, Stack, ThemeProvider } from "@mui/material";
+import { appTheme } from "./assets/theme";
 
 function App() {
   return (
-    <>
+    <ThemeProvider theme={appTheme}>
+      <CssBaseline />
       <Stack>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -34,7 +36,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-    </>
+    </ThemeProvider>
   );
 }
 
