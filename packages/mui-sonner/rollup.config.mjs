@@ -2,6 +2,8 @@
 import { defineConfig } from "rollup";
 import typescript from "@rollup/plugin-typescript";
 // import { nodeResolve } from "@rollup/plugin-node-resolve";
+// import css from "rollup-plugin-import-css";
+import copy from "rollup-plugin-copy";
 
 const config = defineConfig([
   {
@@ -13,9 +15,14 @@ const config = defineConfig([
     plugins: [
       typescript({
         outDir: "dist",
+        declaration: true,
+        sourceMap: false,
+      }),
+      copy({
+        targets: [{ src: "src/style.css", dest: "dist" }],
       }),
     ],
-    external: ["react", "react-dom", "@mui/material"],
+    external: ["react", "react-dom", "@mui/material", /\.css$/u],
   },
 ]);
 

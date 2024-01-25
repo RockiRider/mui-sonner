@@ -23,6 +23,7 @@ import {
   Position,
   ToastOptions,
 } from "./types";
+import "./style.css";
 
 function getDocumentDirection(): ToasterProps["dir"] {
   if (typeof window === "undefined") return "ltr";
