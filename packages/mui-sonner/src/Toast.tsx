@@ -16,7 +16,6 @@ import {
   ToastT,
   HeightT,
   Position,
-  ToastClassnames,
   ToastSeverity,
   ToastVariant,
 } from "./types";
@@ -27,10 +26,6 @@ import {
   TOAST_LIFETIME,
 } from "./constants";
 import { Alert, AlertTitle, Button, Typography } from "@mui/material";
-
-function cn(...classes: (string | undefined)[]) {
-  return classes.filter(Boolean).join(" ");
-}
 
 interface ToastProps {
   toast: ToastT;
@@ -51,11 +46,8 @@ interface ToastProps {
   cancelButtonStyle?: CSSProperties;
   actionButtonStyle?: CSSProperties;
   duration?: number;
-  className?: string;
   unstyled?: boolean;
-  descriptionClassName?: string;
   loadingIcon?: ReactNode;
-  classNames?: ToastClassnames;
   closeButtonAriaLabel?: string;
   severity?: ToastSeverity;
   color?: ToastSeverity;
@@ -78,14 +70,11 @@ export const Toast = ({
   style,
   cancelButtonStyle,
   actionButtonStyle,
-  className = "",
-  descriptionClassName = "",
   duration: durationFromToaster,
   position,
   gap = GAP,
   loadingIcon: loadingIconProp,
   expandByDefault,
-  classNames,
   closeButtonAriaLabel = "Close toast",
   severity = "info",
   variant = "filled",
@@ -103,8 +92,6 @@ export const Toast = ({
   const isVisible = index + 1 <= visibleToasts;
   const toastType = toast.type;
   const dismissible = toast.dismissible !== false;
-  const toastClassname = toast.className || "";
-  const toastDescriptionClassname = toast.descriptionClassName || "";
   // Height index is used to calculate the offset as it gets updated before the toast array, which means we can calculate the new layout faster.
   const heightIndex = useMemo(
     () => heights.findIndex((height) => height.toastId === toast.id) || 0,
@@ -284,14 +271,6 @@ export const Toast = ({
       role="status"
       tabIndex={0}
       ref={toastRef}
-      className={cn(
-        className,
-        toastClassname,
-        classNames?.toast,
-        toast?.classNames?.toast,
-        classNames?.[toastType as keyof typeof classNames],
-        toast?.classNames?.[toastType as keyof typeof classNames]
-      )}
       data-sonner-toast=""
       data-styled={!Boolean(toast.jsx || toast.unstyled || unstyled)}
       data-mounted={mounted}
@@ -394,10 +373,6 @@ export const Toast = ({
                 if (event.defaultPrevented) return;
                 deleteToast();
               }}
-              className={cn(
-                classNames?.actionButton,
-                toast?.classNames?.actionButton
-              )}
             >
               {toast.action.label}
             </Button>
@@ -417,10 +392,6 @@ export const Toast = ({
                     toast.onDismiss?.(toast);
                   }
             }
-            className={cn(
-              classNames?.closeButton,
-              toast?.classNames?.closeButton
-            )}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -449,15 +420,7 @@ export const Toast = ({
           ) : null}
           <div data-content="">
             {toast.description ? (
-              <div
-                data-description=""
-                className={cn(
-                  descriptionClassName,
-                  toastDescriptionClassname,
-                  classNames?.description,
-                  toast?.classNames?.description
-                )}
-              >
+              <div data-description="">
                 <Typography>{toast.description}</Typography>
               </div>
             ) : null}
@@ -474,10 +437,6 @@ export const Toast = ({
                   toast.cancel.onClick(event);
                 }
               }}
-              className={cn(
-                classNames?.cancelButton,
-                toast?.classNames?.cancelButton
-              )}
             >
               {toast.cancel.label}
             </button>
