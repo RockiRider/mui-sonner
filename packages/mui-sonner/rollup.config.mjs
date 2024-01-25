@@ -15,6 +15,7 @@ const config = defineConfig([
         outDir: "dist",
       }),
     ],
+    external: ["react", "react-dom"],
   },
 ]);
 

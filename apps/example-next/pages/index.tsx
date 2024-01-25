@@ -2,7 +2,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { Button, Stack } from "@mui/material";
-import { toast } from "sonner";
+import { toast } from "mui-sonner";
 
 export default function Home() {
   return (
@@ -20,8 +20,8 @@ export default function Home() {
           Material UI - Next.js example in TypeScript
         </Typography>
       </Box>
-      <Stack alignItems="center">
-        <Button variant="contained" onClick={() => toast("First Node")}>
+      <Stack alignItems="center" gap={5}>
+        <Button variant="contained" onClick={() => toast("Second Node")}>
           Toast
         </Button>
       </Stack>

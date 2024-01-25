@@ -4,7 +4,7 @@ import { AppCacheProvider } from "@mui/material-nextjs/v14-pagesRouter";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import theme from "../src/theme";
-import { Toaster } from "sonner";
+import { Toaster } from "mui-sonner";
 
 export default function MyApp(props: AppProps) {
   const { Component, pageProps } = props;
