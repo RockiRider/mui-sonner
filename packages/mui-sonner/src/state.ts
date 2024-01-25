@@ -96,19 +96,29 @@ class Observer {
   };
 
   error = (message: string | React.ReactNode, data?: ExternalToast) => {
-    return this.create({ ...data, message, type: "error" });
+    return this.create({ ...data, message, type: "error", severity: "error" });
   };
 
   success = (message: string | React.ReactNode, data?: ExternalToast) => {
-    return this.create({ ...data, type: "success", message });
+    return this.create({
+      ...data,
+      type: "success",
+      severity: "success",
+      message,
+    });
   };
 
   info = (message: string | React.ReactNode, data?: ExternalToast) => {
-    return this.create({ ...data, type: "info", message });
+    return this.create({ ...data, type: "info", severity: "info", message });
   };
 
   warning = (message: string | React.ReactNode, data?: ExternalToast) => {
-    return this.create({ ...data, type: "warning", message });
+    return this.create({
+      ...data,
+      type: "warning",
+      severity: "warning",
+      message,
+    });
   };
 
   loading = (message: string | React.ReactNode, data?: ExternalToast) => {

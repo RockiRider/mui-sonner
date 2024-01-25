@@ -21,24 +21,31 @@ export default function Home() {
         </Typography>
       </Box>
       <Stack alignItems="center" gap={5}>
+        <Button variant="contained" onClick={() => toast.loading("Saving")}>
+          Loading
+        </Button>
+        <Button variant="contained" onClick={() => toast.success("Success")}>
+          Success
+        </Button>
+        <Button variant="contained" onClick={() => toast.error("Error")}>
+          Error
+        </Button>
         <Button
-          variant="contained"
-          onClick={() =>
-            // toast("Save Successful", {
-            //   severity: "success",
-            //   description: "Your item has been saved.",
-            //   closeButton: true,
-            //   // action: {
-            //   //   label: "Undo",
-            //   //   onClick: () => {
-            //   //     console.log("Undo");
-            //   //   },
-            //   // },
-            // })
-            toast.loading("Saving")
-          }
+          onClick={() => {
+            toast("Save Successful", {
+              severity: "success",
+              description: "Your item has been saved.",
+              closeButton: true,
+              action: {
+                label: "Undo",
+                onClick: () => {
+                  console.log("Undo");
+                },
+              },
+            });
+          }}
         >
-          Toast
+          Custom
         </Button>
       </Stack>
     </Container>
