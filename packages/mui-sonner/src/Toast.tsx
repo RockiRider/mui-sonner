@@ -68,7 +68,6 @@ export const Toast = ({
   removeToast,
   closeButton: closeButtonFromToaster,
   style,
-  cancelButtonStyle,
   actionButtonStyle,
   duration: durationFromToaster,
   position,
@@ -361,7 +360,7 @@ export const Toast = ({
         sx={{ width: "100%" }}
         severity={severity}
         icon={toast.icon}
-        variant={variant}
+        variant={isFront ? variant : expanded ? variant : "outlined"}
         color={color}
         action={
           toast.action ? (

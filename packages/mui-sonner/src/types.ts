@@ -3,7 +3,7 @@ import { AlertColor } from "@mui/material";
 
 export type ToastSeverity = AlertColor;
 export type ToastColor = ToastSeverity;
-export type ToastVariant = "filled" | "outlined";
+export type ToastVariant = "filled" | "standard";
 export type ToastTypes =
   | "normal"
   | "action"
