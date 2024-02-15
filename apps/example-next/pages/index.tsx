@@ -103,6 +103,20 @@ export default function Home() {
         >
           Promise Error
         </Button>
+        <Button
+          onClick={() => {
+            toast.loading("Loading...", {
+              id: "loader",
+            });
+            setTimeout(() => {
+              toast.dismiss("loader");
+            }, 1000);
+          }}
+        >
+          Loading
+        </Button>
+
+        <Button onClick={() => toast.dismiss()}>Dismiss all</Button>
       </Stack>
     </Container>
   );
