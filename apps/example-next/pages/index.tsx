@@ -5,6 +5,22 @@ import { Button, Stack } from "@mui/material";
 import { toast } from "mui-sonner";
 
 export default function Home() {
+  const successPromise = () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve("Success");
+      }, 2000);
+    });
+  };
+
+  const errorPromise = () => {
+    return new Promise((_, reject) => {
+      setTimeout(() => {
+        reject("Error");
+      }, 2000);
+    });
+  };
+
   return (
     <Container maxWidth="lg">
       <Box
@@ -21,21 +37,33 @@ export default function Home() {
         </Typography>
       </Box>
       <Stack alignItems="center" gap={5}>
-        <Button variant="contained" onClick={() => toast.loading("Saving")}>
-          Loading
+        <Button
+          variant="contained"
+          onClick={() => toast.loading("You have a new message!")}
+        >
+          Info
         </Button>
-        <Button variant="contained" onClick={() => toast.success("Success")}>
+        <Button
+          variant="contained"
+          onClick={() => toast.success("Successfully updated!")}
+        >
           Success
         </Button>
         <Button
           variant="contained"
           onClick={() =>
-            toast.error("Error", {
-              variant: "outlined",
+            toast.error("Sorry something went wrong!", {
+              variant: "filled",
             })
           }
         >
           Error
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() => toast.warning("You have unsaved changes!")}
+        >
+          Warning
         </Button>
         <Button
           onClick={() => {
@@ -52,6 +80,28 @@ export default function Home() {
           }}
         >
           Custom
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() =>
+            toast.promise(successPromise, {
+              loading: "Loading...",
+              success: "Loaded",
+            })
+          }
+        >
+          Promise Success
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() =>
+            toast.promise(errorPromise, {
+              loading: "Loading...",
+              error: "Error",
+            })
+          }
+        >
+          Promise Error
         </Button>
       </Stack>
     </Container>
