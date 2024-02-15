@@ -46,7 +46,6 @@ interface ToastProps {
   position: Position;
   visibleToasts: number;
   expandByDefault: boolean;
-  closeButton: boolean;
   interacting: boolean;
   style?: CSSProperties;
   cancelButtonStyle?: CSSProperties;
@@ -54,6 +53,7 @@ interface ToastProps {
   duration?: number;
   unstyled?: boolean;
   loadingIcon?: ReactNode;
+  closeIcon?: ReactNode;
   closeButtonAriaLabel?: string;
   severity?: ToastSeverity;
   color?: ToastSeverity;
@@ -72,7 +72,7 @@ export const Toast = ({
   toasts,
   expanded,
   removeToast,
-  closeButton: closeButtonFromToaster,
+  closeIcon: closeIconFromToaster,
   style,
   actionButtonStyle,
   duration: durationFromToaster,
@@ -102,10 +102,7 @@ export const Toast = ({
     () => heights.findIndex((height) => height.toastId === toast.id) || 0,
     [heights, toast.id]
   );
-  const closeButton = useMemo(
-    () => toast.closeButton ?? closeButtonFromToaster,
-    [toast.closeButton, closeButtonFromToaster]
-  );
+
   const duration = useMemo(
     () => toast.duration || durationFromToaster || TOAST_LIFETIME,
     [toast.duration, durationFromToaster]
@@ -381,39 +378,20 @@ export const Toast = ({
             >
               {toast.action.label}
             </Button>
+          ) : toast.closeIcon ? (
+            <IconButton
+              size="small"
+              color="inherit"
+              aria-label={closeButtonAriaLabel}
+              onClick={() => {
+                deleteToast();
+              }}
+            >
+              {toast.closeIcon}
+            </IconButton>
           ) : undefined
         }
       >
-        {closeButton && (
-          <IconButton
-            aria-label={closeButtonAriaLabel}
-            data-disabled={disabled}
-            data-close-button
-            onClick={
-              disabled || !dismissible
-                ? () => {}
-                : () => {
-                    deleteToast();
-                    toast.onDismiss?.(toast);
-                  }
-            }
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="12"
-              height="12"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </IconButton>
-        )}
         {toast.title && <AlertTitle>{toast.title}</AlertTitle>}
         <>
           {toast.promise && (

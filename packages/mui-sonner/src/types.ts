@@ -52,7 +52,7 @@ export interface ToastT {
   icon?: ReactNode;
   jsx?: ReactNode;
   invert?: boolean;
-  closeButton?: boolean;
+  closeIcon?: ReactNode;
   dismissible?: boolean;
   description?: ReactNode;
   duration?: number;
@@ -94,7 +94,7 @@ export interface HeightT {
 
 export type ToastOptions = {
   className?: string;
-  closeButton?: boolean;
+  closeIcon?: ReactNode;
   descriptionClassName?: string;
   style?: React.CSSProperties;
   cancelButtonStyle?: React.CSSProperties;
