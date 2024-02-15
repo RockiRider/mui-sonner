@@ -39,7 +39,11 @@ export default function Home() {
       <Stack alignItems="center" gap={5}>
         <Button
           variant="contained"
-          onClick={() => toast.loading("You have a new message!")}
+          onClick={() =>
+            toast.loading("You have a new message!", {
+              closeButton: true,
+            })
+          }
         >
           Info
         </Button>

@@ -25,7 +25,13 @@ import {
   TIME_BEFORE_UNMOUNT,
   TOAST_LIFETIME,
 } from "./constants";
-import { Alert, AlertTitle, Button, Typography } from "@mui/material";
+import {
+  Alert,
+  AlertTitle,
+  Button,
+  IconButton,
+  Typography,
+} from "@mui/material";
 
 interface ToastProps {
   toast: ToastT;
@@ -379,7 +385,7 @@ export const Toast = ({
         }
       >
         {closeButton && (
-          <button
+          <IconButton
             aria-label={closeButtonAriaLabel}
             data-disabled={disabled}
             data-close-button
@@ -406,7 +412,7 @@ export const Toast = ({
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
-          </button>
+          </IconButton>
         )}
         {toast.title && <AlertTitle>{toast.title}</AlertTitle>}
         <>
