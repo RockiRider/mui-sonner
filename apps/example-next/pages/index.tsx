@@ -66,6 +66,7 @@ export default function Home() {
           Warning
         </Button>
         <Button
+          variant="contained"
           onClick={() => {
             toast("Save Successful", {
               severity: "success",
@@ -104,6 +105,7 @@ export default function Home() {
           Promise Error
         </Button>
         <Button
+          variant="contained"
           onClick={() => {
             toast.loading("Loading...", {
               id: "loader",
@@ -116,7 +118,9 @@ export default function Home() {
           Loading
         </Button>
 
-        <Button onClick={() => toast.dismiss()}>Dismiss all</Button>
+        <Button variant="contained" onClick={() => toast.dismiss()}>
+          Dismiss all
+        </Button>
       </Stack>
     </Container>
   );
