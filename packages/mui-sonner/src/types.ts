@@ -3,7 +3,7 @@ import { AlertColor } from "@mui/material";
 
 export type ToastSeverity = AlertColor;
 export type ToastColor = ToastSeverity;
-export type ToastVariant = "filled" | "outlined";
+export type ToastVariant = "filled" | "standard";
 export type ToastTypes =
   | "normal"
   | "action"
@@ -52,7 +52,7 @@ export interface ToastT {
   icon?: ReactNode;
   jsx?: ReactNode;
   invert?: boolean;
-  closeButton?: boolean;
+  closeIcon?: ReactNode;
   dismissible?: boolean;
   description?: ReactNode;
   duration?: number;
@@ -94,7 +94,7 @@ export interface HeightT {
 
 export type ToastOptions = {
   className?: string;
-  closeButton?: boolean;
+  closeIcon?: ReactNode;
   descriptionClassName?: string;
   style?: React.CSSProperties;
   cancelButtonStyle?: React.CSSProperties;

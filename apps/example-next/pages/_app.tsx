@@ -1,13 +1,18 @@
 import Head from "next/head";
 import { AppProps } from "next/app";
 import { AppCacheProvider } from "@mui/material-nextjs/v14-pagesRouter";
-import { ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import theme from "../src/theme";
 import { Toaster } from "mui-sonner";
+import getLPTheme from "@styles/dark";
+import { PaletteMode } from "@mui/material";
+import { useState } from "react";
 
 export default function MyApp(props: AppProps) {
   const { Component, pageProps } = props;
+  const [mode, setMode] = useState<PaletteMode>("dark");
+  const theme = createTheme(getLPTheme(mode));
+
   return (
     <AppCacheProvider {...props}>
       <Head>

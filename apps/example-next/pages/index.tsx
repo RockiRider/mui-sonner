@@ -3,8 +3,25 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { Button, Stack } from "@mui/material";
 import { toast } from "mui-sonner";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function Home() {
+  const successPromise = () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve("Success");
+      }, 2000);
+    });
+  };
+
+  const errorPromise = () => {
+    return new Promise((_, reject) => {
+      setTimeout(() => {
+        reject("Error");
+      }, 2000);
+    });
+  };
+
   return (
     <Container maxWidth="lg">
       <Box
@@ -21,23 +38,40 @@ export default function Home() {
         </Typography>
       </Box>
       <Stack alignItems="center" gap={5}>
-        <Button variant="contained" onClick={() => toast.loading("Saving")}>
-          Loading
+        <Button
+          variant="contained"
+          onClick={() =>
+            toast.loading("You have a new message!", {
+              closeIcon: <CloseIcon fontSize="small" />,
+            })
+          }
+        >
+          Info
         </Button>
-        <Button variant="contained" onClick={() => toast.success("Success")}>
+        <Button
+          variant="contained"
+          onClick={() => toast.success("Successfully updated!")}
+        >
           Success
         </Button>
         <Button
           variant="contained"
           onClick={() =>
-            toast.error("Error", {
-              variant: "outlined",
+            toast.error("Sorry something went wrong!", {
+              variant: "filled",
             })
           }
         >
           Error
         </Button>
         <Button
+          variant="contained"
+          onClick={() => toast.warning("You have unsaved changes!")}
+        >
+          Warning
+        </Button>
+        <Button
+          variant="contained"
           onClick={() => {
             toast("Save Successful", {
               severity: "success",
@@ -52,6 +86,45 @@ export default function Home() {
           }}
         >
           Custom
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() =>
+            toast.promise(successPromise, {
+              loading: "Loading...",
+              success: "Loaded",
+            })
+          }
+        >
+          Promise Success
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() =>
+            toast.promise(errorPromise, {
+              loading: "Loading...",
+              error: "Error",
+            })
+          }
+        >
+          Promise Error
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() => {
+            toast.loading("Loading...", {
+              id: "loader",
+            });
+            setTimeout(() => {
+              toast.dismiss("loader");
+            }, 1000);
+          }}
+        >
+          Loading
+        </Button>
+
+        <Button variant="contained" onClick={() => toast.dismiss()}>
+          Dismiss all
         </Button>
       </Stack>
     </Container>

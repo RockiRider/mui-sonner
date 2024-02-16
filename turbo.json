@@ -4,10 +4,13 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]
+    },
+    "preview": {
+      "dependsOn": ["build"]
     },
     "dev": {
       "cache": false,
@@ -19,5 +22,6 @@
     "example-next#dev": {
       "dependsOn": ["^mui-sonner#build"]
     }
+    
   }
 }
