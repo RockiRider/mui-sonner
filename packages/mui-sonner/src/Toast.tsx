@@ -337,7 +337,7 @@ export const Toast = ({
       <Alert
         sx={{ width: "100%" }}
         severity={severity}
-        icon={toast.icon}
+        icon={toast.type === "loading" ? false : toast.icon}
         variant={isFront ? variant : expanded ? variant : "outlined"}
         color={color}
         action={
