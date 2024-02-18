@@ -89,8 +89,6 @@ export interface HeightT {
 }
 
 export type ToastOptions = {
-  className?: string;
-  descriptionClassName?: string;
   style?: React.CSSProperties;
   duration?: number;
   unstyled?: boolean;

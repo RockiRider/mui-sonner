@@ -47,7 +47,7 @@ interface ToasterProps {
   duration?: number;
   gap?: number;
   visibleToasts?: number;
-  closeIcon?: boolean;
+  closeIcon?: ReactNode;
   toastOptions?: ToastOptions;
   className?: string;
   style?: React.CSSProperties;
