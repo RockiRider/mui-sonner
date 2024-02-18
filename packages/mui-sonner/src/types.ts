@@ -52,7 +52,7 @@ export interface ToastT {
   icon?: ReactNode;
   jsx?: ReactNode;
   invert?: boolean;
-  closeIcon?: ReactNode;
+  closeButton?: boolean;
   dismissible?: boolean;
   description?: ReactNode;
   duration?: number;
@@ -61,10 +61,6 @@ export interface ToastT {
   action?: {
     label: ReactNode;
     onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  };
-  cancel?: {
-    label: ReactNode;
-    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   };
   onDismiss?: (toast: ToastT) => void;
   onAutoClose?: (toast: ToastT) => void;

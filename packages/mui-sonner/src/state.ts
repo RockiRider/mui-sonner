@@ -203,15 +203,6 @@ class Observer {
 
     return id;
   };
-
-  custom = (
-    jsx: (id: number | string) => React.ReactElement,
-    data?: ExternalToast
-  ) => {
-    const id = data?.id || toastsCounter++;
-    this.create({ jsx: jsx(id), id, ...data });
-    return id;
-  };
 }
 
 export const ToastState = new Observer();
@@ -239,7 +230,6 @@ export const toast = Object.assign(basicToast, {
   info: ToastState.info,
   warning: ToastState.warning,
   error: ToastState.error,
-  custom: ToastState.custom,
   promise: ToastState.promise,
   dismiss: ToastState.dismiss,
   loading: ToastState.loading,

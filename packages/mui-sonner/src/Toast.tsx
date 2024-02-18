@@ -378,7 +378,7 @@ export const Toast = ({
             >
               {toast.action.label}
             </Button>
-          ) : toast.closeIcon ? (
+          ) : toast.closeButton ? (
             <IconButton
               size="small"
               color="inherit"
@@ -387,7 +387,7 @@ export const Toast = ({
                 deleteToast();
               }}
             >
-              {toast.closeIcon}
+              {closeIconFromToaster}
             </IconButton>
           ) : undefined
         }
@@ -408,23 +408,6 @@ export const Toast = ({
               </div>
             )}
           </div>
-          {toast.cancel && (
-            <Button
-              variant="contained"
-              // data-button
-              // data-cancel
-              // style={toast.cancelButtonStyle || cancelButtonStyle}
-              onClick={(event) => {
-                if (!dismissible) return;
-                deleteToast();
-                if (toast.cancel?.onClick) {
-                  toast.cancel.onClick(event);
-                }
-              }}
-            >
-              {toast.cancel.label}
-            </Button>
-          )}
         </>
       </Alert>
     </li>
