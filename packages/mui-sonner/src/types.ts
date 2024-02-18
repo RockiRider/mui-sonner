@@ -11,30 +11,16 @@ export type PromiseT<Data = any> = Promise<Data> | (() => Promise<Data>);
 export type PromiseExternalToast = Omit<ExternalToast, "description">;
 
 export type PromiseData<ToastData = any> = PromiseExternalToast & {
-  loading?: string | ReactNode;
-  success?: string | ReactNode | ((data: ToastData) => ReactNode | string);
-  error?: string | ReactNode | ((error: any) => ReactNode | string);
+  loading?: string;
+  success?: string | ((data: ToastData) => string);
+  error?: string | ((error: any) => string);
   description?: string | ReactNode | ((data: any) => ReactNode | string);
   finally?: () => void | Promise<void>;
 };
 
-export interface ToastClassnames {
-  toast?: string;
-  title?: string;
-  description?: string;
-  loader?: string;
-  closeButton?: string;
-  actionButton?: string;
-  success?: string;
-  error?: string;
-  info?: string;
-  warning?: string;
-  loading?: string;
-}
-
 export interface ToastT {
   id: number | string;
-  title?: string | ReactNode;
+  title?: string;
   severity?: ToastSeverity;
   color?: ToastColor;
   variant?: ToastVariant;

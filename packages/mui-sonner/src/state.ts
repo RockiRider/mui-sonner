@@ -1,4 +1,3 @@
-import React from "react";
 import {
   ExternalToast,
   PromiseData,
@@ -42,10 +41,9 @@ class Observer {
 
   create = (
     data: ExternalToast & {
-      message?: string | React.ReactNode;
+      message?: string;
       type?: ToastTypes;
       promise?: PromiseT;
-      jsx?: React.ReactElement;
     }
   ) => {
     const { message, ...rest } = data;
@@ -95,11 +93,11 @@ class Observer {
     return id;
   };
 
-  error = (message: string | React.ReactNode, data?: ExternalToast) => {
+  error = (message: string, data?: ExternalToast) => {
     return this.create({ ...data, message, type: "error", severity: "error" });
   };
 
-  success = (message: string | React.ReactNode, data?: ExternalToast) => {
+  success = (message: string, data?: ExternalToast) => {
     return this.create({
       ...data,
       type: "success",
@@ -108,11 +106,11 @@ class Observer {
     });
   };
 
-  info = (message: string | React.ReactNode, data?: ExternalToast) => {
+  info = (message: string, data?: ExternalToast) => {
     return this.create({ ...data, type: "info", severity: "info", message });
   };
 
-  warning = (message: string | React.ReactNode, data?: ExternalToast) => {
+  warning = (message: string, data?: ExternalToast) => {
     return this.create({
       ...data,
       type: "warning",
@@ -121,7 +119,7 @@ class Observer {
     });
   };
 
-  loading = (message: string | React.ReactNode, data?: ExternalToast) => {
+  loading = (message: string, data?: ExternalToast) => {
     return this.create({ ...data, type: "loading", message });
   };
 
@@ -133,7 +131,6 @@ class Observer {
       // Nothing to show
       return;
     }
-
     let id: string | number | undefined = undefined;
     if (data.loading !== undefined) {
       id = this.create({
@@ -208,10 +205,7 @@ class Observer {
 export const ToastState = new Observer();
 
 // bind this to the toast function
-const toastFunction = (
-  message: string | React.ReactNode,
-  data?: ExternalToast
-) => {
+const toastFunction = (message: string, data?: ExternalToast) => {
   const id = data?.id || toastsCounter++;
 
   ToastState.addToast({

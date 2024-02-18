@@ -375,7 +375,11 @@ export const Toast = ({
         <div data-content="">
           {toast.description && (
             <div data-description="">
-              <Typography>{toast.description}</Typography>
+              {typeof toast.description === "string" ? (
+                <Typography>{toast.description}</Typography>
+              ) : (
+                toast.description
+              )}
             </div>
           )}
         </div>
