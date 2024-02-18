@@ -344,7 +344,7 @@ export const Toast = ({
           toast.action ? (
             <Button
               variant="contained"
-              style={toast.actionButtonStyle}
+              // style={toast.actionButtonStyle}
               onClick={(event) => {
                 toast.action?.onClick(event);
                 if (event.defaultPrevented) return;

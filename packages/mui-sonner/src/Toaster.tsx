@@ -46,11 +46,11 @@ interface ToasterProps {
   duration?: number;
   gap?: number;
   visibleToasts?: number;
-  closeIcon?: ReactNode;
   toastOptions?: ToastOptions;
   offset?: string | number;
   dir?: "rtl" | "ltr" | "auto";
   loadingIcon?: ReactNode;
+  closeIcon?: ReactNode;
   containerAriaLabel?: string;
 }
 

@@ -53,7 +53,7 @@ export interface ToastT {
   onDismiss?: (toast: ToastT) => void;
   onAutoClose?: (toast: ToastT) => void;
   promise?: PromiseT;
-  actionButtonStyle?: React.CSSProperties;
+  // actionButtonStyle?: React.CSSProperties;
   position?: Position;
 }
 
@@ -64,6 +64,7 @@ export type Position =
   | "bottom-right"
   | "top-center"
   | "bottom-center";
+
 export interface HeightT {
   height: number;
   toastId: number | string;
@@ -81,8 +82,6 @@ export enum SwipeStateTypes {
   NotSwiped = "NotSwiped",
 }
 
-export type Theme = "light" | "dark";
-
 export interface ToastToDismiss {
   id: number | string;
   dismiss: boolean;
@@ -90,7 +89,7 @@ export interface ToastToDismiss {
 
 export type ExternalToast = Omit<
   ToastT,
-  "id" | "type" | "title" | "jsx" | "delete" | "promise"
+  "id" | "type" | "title" | "delete" | "promise"
 > & {
   id?: number | string;
 };
