@@ -2,17 +2,9 @@ import { ReactNode } from "react";
 import { AlertColor } from "@mui/material";
 
 export type ToastSeverity = AlertColor;
-export type ToastColor = ToastSeverity;
+export type ToastColor = AlertColor;
 export type ToastVariant = "filled" | "standard";
-export type ToastTypes =
-  | "normal"
-  | "action"
-  | "success"
-  | "info"
-  | "warning"
-  | "error"
-  | "loading"
-  | "default";
+export type ToastTypes = "success" | "info" | "warning" | "error" | "loading";
 
 export type PromiseT<Data = any> = Promise<Data> | (() => Promise<Data>);
 
@@ -32,14 +24,12 @@ export interface ToastClassnames {
   description?: string;
   loader?: string;
   closeButton?: string;
-  cancelButton?: string;
   actionButton?: string;
   success?: string;
   error?: string;
   info?: string;
   warning?: string;
   loading?: string;
-  default?: string;
 }
 
 export interface ToastT {
@@ -50,7 +40,6 @@ export interface ToastT {
   variant?: ToastVariant;
   type?: ToastTypes;
   icon?: ReactNode;
-  jsx?: ReactNode;
   closeButton?: boolean;
   dismissible?: boolean;
   description?: ReactNode;
