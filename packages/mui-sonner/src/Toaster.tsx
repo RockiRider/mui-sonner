@@ -275,8 +275,6 @@ export const Toaster = ({
                   position={position}
                   style={toastOptions?.style}
                   unstyled={toastOptions?.unstyled}
-                  cancelButtonStyle={toastOptions?.cancelButtonStyle}
-                  actionButtonStyle={toastOptions?.actionButtonStyle}
                   removeToast={removeToast}
                   toasts={toasts.filter((t) => t.position == toast.position)}
                   heights={heights.filter((h) => h.position == toast.position)}

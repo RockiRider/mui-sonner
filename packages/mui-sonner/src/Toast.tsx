@@ -48,8 +48,6 @@ interface ToastProps {
   expandByDefault: boolean;
   interacting: boolean;
   style?: CSSProperties;
-  cancelButtonStyle?: CSSProperties;
-  actionButtonStyle?: CSSProperties;
   duration?: number;
   unstyled?: boolean;
   loadingIcon?: ReactNode;
@@ -74,7 +72,6 @@ export const Toast = ({
   removeToast,
   closeIcon: closeIconFromToaster,
   style,
-  actionButtonStyle,
   duration: durationFromToaster,
   position,
   gap = GAP,
@@ -369,7 +366,7 @@ export const Toast = ({
           toast.action ? (
             <Button
               variant="contained"
-              style={toast.actionButtonStyle || actionButtonStyle}
+              style={toast.actionButtonStyle}
               onClick={(event) => {
                 toast.action?.onClick(event);
                 if (event.defaultPrevented) return;

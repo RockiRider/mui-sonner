@@ -93,8 +93,6 @@ export type ToastOptions = {
   closeIcon?: ReactNode;
   descriptionClassName?: string;
   style?: React.CSSProperties;
-  cancelButtonStyle?: React.CSSProperties;
-  actionButtonStyle?: React.CSSProperties;
   duration?: number;
   unstyled?: boolean;
   classNames?: ToastClassnames;
