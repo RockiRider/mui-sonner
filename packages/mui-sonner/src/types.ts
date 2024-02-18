@@ -90,12 +90,11 @@ export interface HeightT {
 
 export type ToastOptions = {
   className?: string;
-  closeIcon?: ReactNode;
   descriptionClassName?: string;
   style?: React.CSSProperties;
   duration?: number;
   unstyled?: boolean;
-  classNames?: ToastClassnames;
+  closeButton?: boolean;
 };
 
 export enum SwipeStateTypes {

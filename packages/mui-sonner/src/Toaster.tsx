@@ -47,7 +47,7 @@ interface ToasterProps {
   duration?: number;
   gap?: number;
   visibleToasts?: number;
-  closeButton?: boolean;
+  closeIcon?: boolean;
   toastOptions?: ToastOptions;
   className?: string;
   style?: React.CSSProperties;
@@ -62,7 +62,7 @@ export const Toaster = ({
   position = "bottom-right",
   hotkey = ["altKey", "KeyT"],
   expand = false,
-  closeButton = false,
+  closeIcon,
   className,
   offset,
   duration,
@@ -270,7 +270,7 @@ export const Toaster = ({
                   duration={toastOptions?.duration ?? duration}
                   invert={invert}
                   visibleToasts={visibleToasts}
-                  closeIcon={toastOptions?.closeIcon}
+                  closeIcon={closeIcon}
                   interacting={interacting}
                   position={position}
                   style={toastOptions?.style}
