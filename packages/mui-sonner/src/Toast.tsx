@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import {
   useState,
   useRef,
@@ -7,11 +7,9 @@ import {
   useLayoutEffect,
   useCallback,
   ReactNode,
-  CSSProperties,
   Dispatch,
   SetStateAction,
 } from "react";
-import { Loader } from "./assets";
 import {
   ToastT,
   HeightT,
@@ -30,6 +28,7 @@ import {
   AlertTitle,
   Button,
   IconButton,
+  Stack,
   Typography,
 } from "@mui/material";
 
@@ -38,7 +37,6 @@ interface ToastProps {
   toasts: ToastT[];
   index: number;
   expanded: boolean;
-  invert: boolean;
   heights: HeightT[];
   setHeights: Dispatch<SetStateAction<HeightT[]>>;
   removeToast: (toast: ToastT) => void;
@@ -47,11 +45,7 @@ interface ToastProps {
   visibleToasts: number;
   expandByDefault: boolean;
   interacting: boolean;
-  style?: CSSProperties;
-  cancelButtonStyle?: CSSProperties;
-  actionButtonStyle?: CSSProperties;
   duration?: number;
-  unstyled?: boolean;
   loadingIcon?: ReactNode;
   closeIcon?: ReactNode;
   closeButtonAriaLabel?: string;
@@ -61,9 +55,7 @@ interface ToastProps {
 }
 
 export const Toast = ({
-  invert: ToasterInvert,
   toast,
-  unstyled,
   interacting,
   setHeights,
   visibleToasts,
@@ -73,12 +65,10 @@ export const Toast = ({
   expanded,
   removeToast,
   closeIcon: closeIconFromToaster,
-  style,
-  actionButtonStyle,
   duration: durationFromToaster,
   position,
   gap = GAP,
-  loadingIcon: loadingIconProp,
+  loadingIcon: loadingIconFromToaster,
   expandByDefault,
   closeButtonAriaLabel = "Close toast",
   severity = "info",
@@ -122,7 +112,6 @@ export const Toast = ({
       return prev + curr.height;
     }, 0);
   }, [heights, heightIndex]);
-  const invert = toast.invert || ToasterInvert;
   const disabled = toastType === "loading";
 
   offset.current = useMemo(
@@ -255,17 +244,6 @@ export const Toast = ({
     }
   }, [deleteToast, toast.delete]);
 
-  function getLoadingIcon() {
-    if (loadingIconProp) {
-      return (
-        <div className="sonner-loader" data-visible={toastType === "loading"}>
-          {loadingIconProp}
-        </div>
-      );
-    }
-    return <Loader visible={toastType === "loading"} />;
-  }
-
   return (
     <li
       aria-live={toast.important ? "assertive" : "polite"}
@@ -274,7 +252,7 @@ export const Toast = ({
       tabIndex={0}
       ref={toastRef}
       data-sonner-toast=""
-      data-styled={!Boolean(toast.jsx || toast.unstyled || unstyled)}
+      data-styled={true}
       data-mounted={mounted}
       data-promise={Boolean(toast.promise)}
       data-removed={removed}
@@ -285,7 +263,6 @@ export const Toast = ({
       data-front={isFront}
       data-swiping={swiping}
       data-dismissible={dismissible}
-      data-invert={invert}
       data-swipe-out={swipeOut}
       data-expanded={Boolean(expanded || (expandByDefault && mounted))}
       style={
@@ -295,10 +272,8 @@ export const Toast = ({
           "--z-index": toasts.length - index,
           "--offset": `${removed ? offsetBeforeRemove : offset.current}px`,
           "--initial-height": expandByDefault ? "auto" : `${initialHeight}px`,
-          ...style,
-          ...toast.style,
           padding: 0,
-        } as React.CSSProperties
+        } as CSSProperties
       }
       onPointerDown={(event) => {
         if (disabled || !dismissible) return;
@@ -362,14 +337,14 @@ export const Toast = ({
       <Alert
         sx={{ width: "100%" }}
         severity={severity}
-        icon={toast.icon}
+        icon={toast.type === "loading" ? false : toast.icon}
         variant={isFront ? variant : expanded ? variant : "outlined"}
         color={color}
         action={
           toast.action ? (
             <Button
               variant="contained"
-              style={toast.actionButtonStyle || actionButtonStyle}
+              // style={toast.actionButtonStyle}
               onClick={(event) => {
                 toast.action?.onClick(event);
                 if (event.defaultPrevented) return;
@@ -378,7 +353,7 @@ export const Toast = ({
             >
               {toast.action.label}
             </Button>
-          ) : toast.closeIcon ? (
+          ) : toast.closeButton ? (
             <IconButton
               size="small"
               color="inherit"
@@ -387,45 +362,27 @@ export const Toast = ({
                 deleteToast();
               }}
             >
-              {toast.closeIcon}
+              {closeIconFromToaster}
             </IconButton>
           ) : undefined
         }
       >
-        {toast.title && <AlertTitle>{toast.title}</AlertTitle>}
-        <>
-          {toast.promise && (
-            <>
-              {toast.promise || toast.type === "loading"
-                ? getLoadingIcon()
-                : null}
-            </>
-          )}
-          <div data-content="">
-            {toast.description && (
-              <div data-description="">
+        <Stack direction="row" gap={1}>
+          {(toast.promise || toast.type === "loading") &&
+            loadingIconFromToaster}
+          {toast.title && <AlertTitle>{toast.title}</AlertTitle>}
+        </Stack>
+        <div data-content="">
+          {toast.description && (
+            <div data-description="">
+              {typeof toast.description === "string" ? (
                 <Typography>{toast.description}</Typography>
-              </div>
-            )}
-          </div>
-          {toast.cancel && (
-            <Button
-              variant="contained"
-              // data-button
-              // data-cancel
-              // style={toast.cancelButtonStyle || cancelButtonStyle}
-              onClick={(event) => {
-                if (!dismissible) return;
-                deleteToast();
-                if (toast.cancel?.onClick) {
-                  toast.cancel.onClick(event);
-                }
-              }}
-            >
-              {toast.cancel.label}
-            </Button>
+              ) : (
+                toast.description
+              )}
+            </div>
           )}
-        </>
+        </div>
       </Alert>
     </li>
   );

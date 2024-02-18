@@ -2,57 +2,31 @@ import { ReactNode } from "react";
 import { AlertColor } from "@mui/material";
 
 export type ToastSeverity = AlertColor;
-export type ToastColor = ToastSeverity;
+export type ToastColor = AlertColor;
 export type ToastVariant = "filled" | "standard";
-export type ToastTypes =
-  | "normal"
-  | "action"
-  | "success"
-  | "info"
-  | "warning"
-  | "error"
-  | "loading"
-  | "default";
+export type ToastTypes = "success" | "info" | "warning" | "error" | "loading";
 
 export type PromiseT<Data = any> = Promise<Data> | (() => Promise<Data>);
 
 export type PromiseExternalToast = Omit<ExternalToast, "description">;
 
 export type PromiseData<ToastData = any> = PromiseExternalToast & {
-  loading?: string | ReactNode;
-  success?: string | ReactNode | ((data: ToastData) => ReactNode | string);
-  error?: string | ReactNode | ((error: any) => ReactNode | string);
+  loading?: string;
+  success?: string | ((data: ToastData) => string);
+  error?: string | ((error: any) => string);
   description?: string | ReactNode | ((data: any) => ReactNode | string);
   finally?: () => void | Promise<void>;
 };
 
-export interface ToastClassnames {
-  toast?: string;
-  title?: string;
-  description?: string;
-  loader?: string;
-  closeButton?: string;
-  cancelButton?: string;
-  actionButton?: string;
-  success?: string;
-  error?: string;
-  info?: string;
-  warning?: string;
-  loading?: string;
-  default?: string;
-}
-
-export interface ToastT {
+export type ToastT = {
   id: number | string;
-  title?: string | ReactNode;
+  title?: string;
   severity?: ToastSeverity;
   color?: ToastColor;
   variant?: ToastVariant;
   type?: ToastTypes;
   icon?: ReactNode;
-  jsx?: ReactNode;
-  invert?: boolean;
-  closeIcon?: ReactNode;
+  closeButton?: boolean;
   dismissible?: boolean;
   description?: ReactNode;
   duration?: number;
@@ -62,22 +36,27 @@ export interface ToastT {
     label: ReactNode;
     onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   };
-  cancel?: {
-    label: ReactNode;
-    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  };
   onDismiss?: (toast: ToastT) => void;
   onAutoClose?: (toast: ToastT) => void;
   promise?: PromiseT;
-  cancelButtonStyle?: React.CSSProperties;
-  actionButtonStyle?: React.CSSProperties;
-  style?: React.CSSProperties;
-  unstyled?: boolean;
-  className?: string;
-  classNames?: ToastClassnames;
-  descriptionClassName?: string;
+  // actionButtonStyle?: React.CSSProperties;
   position?: Position;
-}
+};
+
+export type ToasterProps = {
+  position?: Position;
+  hotkey?: string[];
+  expand?: boolean;
+  duration?: number;
+  gap?: number;
+  visibleToasts?: number;
+  toastOptions?: ToastOptions;
+  offset?: string | number;
+  dir?: "rtl" | "ltr" | "auto";
+  loadingIcon?: ReactNode;
+  closeIcon?: ReactNode;
+  containerAriaLabel?: string;
+};
 
 export type Position =
   | "top-left"
@@ -86,6 +65,7 @@ export type Position =
   | "bottom-right"
   | "top-center"
   | "bottom-center";
+
 export interface HeightT {
   height: number;
   toastId: number | string;
@@ -93,15 +73,8 @@ export interface HeightT {
 }
 
 export type ToastOptions = {
-  className?: string;
-  closeIcon?: ReactNode;
-  descriptionClassName?: string;
-  style?: React.CSSProperties;
-  cancelButtonStyle?: React.CSSProperties;
-  actionButtonStyle?: React.CSSProperties;
   duration?: number;
-  unstyled?: boolean;
-  classNames?: ToastClassnames;
+  closeButton?: boolean;
 };
 
 export enum SwipeStateTypes {
@@ -110,8 +83,6 @@ export enum SwipeStateTypes {
   NotSwiped = "NotSwiped",
 }
 
-export type Theme = "light" | "dark";
-
 export interface ToastToDismiss {
   id: number | string;
   dismiss: boolean;
@@ -119,7 +90,7 @@ export interface ToastToDismiss {
 
 export type ExternalToast = Omit<
   ToastT,
-  "id" | "type" | "title" | "jsx" | "delete" | "promise"
+  "id" | "type" | "title" | "delete" | "promise"
 > & {
   id?: number | string;
 };

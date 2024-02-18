@@ -5,8 +5,9 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Toaster } from "mui-sonner";
 import getLPTheme from "@styles/dark";
-import { PaletteMode } from "@mui/material";
+import { CircularProgress, Icon, PaletteMode } from "@mui/material";
 import { useState } from "react";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function MyApp(props: AppProps) {
   const { Component, pageProps } = props;
@@ -21,7 +22,14 @@ export default function MyApp(props: AppProps) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Toaster />
+        <Toaster
+          closeIcon={
+            <Icon fontSize="small">
+              <CloseIcon />
+            </Icon>
+          }
+          loadingIcon={<CircularProgress size={20} />}
+        />
         <Component {...pageProps} />
       </ThemeProvider>
     </AppCacheProvider>

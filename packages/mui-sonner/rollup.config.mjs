@@ -1,8 +1,7 @@
 // rollup.config.mjs
 import { defineConfig } from "rollup";
 import typescript from "@rollup/plugin-typescript";
-// import { nodeResolve } from "@rollup/plugin-node-resolve";
-// import css from "rollup-plugin-import-css";
+// import banner2 from 'rollup-plugin-banner2'
 import copy from "rollup-plugin-copy";
 
 const config = defineConfig([

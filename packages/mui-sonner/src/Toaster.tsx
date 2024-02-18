@@ -1,6 +1,5 @@
 import React, {
   CSSProperties,
-  ReactNode,
   useCallback,
   useEffect,
   useMemo,
@@ -21,7 +20,7 @@ import {
   HeightT,
   ToastToDismiss,
   Position,
-  ToastOptions,
+  ToasterProps,
 } from "./types";
 import "./style.css";
 
@@ -39,34 +38,13 @@ function getDocumentDirection(): ToasterProps["dir"] {
   return dirAttribute as ToasterProps["dir"];
 }
 
-interface ToasterProps {
-  invert?: boolean;
-  position?: Position;
-  hotkey?: string[];
-  expand?: boolean;
-  duration?: number;
-  gap?: number;
-  visibleToasts?: number;
-  closeButton?: boolean;
-  toastOptions?: ToastOptions;
-  className?: string;
-  style?: React.CSSProperties;
-  offset?: string | number;
-  dir?: "rtl" | "ltr" | "auto";
-  loadingIcon?: ReactNode;
-  containerAriaLabel?: string;
-}
-
 export const Toaster = ({
-  invert = false,
   position = "bottom-right",
   hotkey = ["altKey", "KeyT"],
   expand = false,
-  closeButton = false,
-  className,
+  closeIcon,
   offset,
   duration,
-  style,
   visibleToasts = VISIBLE_TOASTS_AMOUNT,
   toastOptions,
   dir = getDocumentDirection(),
@@ -197,7 +175,6 @@ export const Toaster = ({
             dir={dir === "auto" ? getDocumentDirection() : dir}
             tabIndex={-1}
             ref={listRef}
-            className={className}
             data-sonner-toaster
             data-y-position={y}
             data-x-position={x}
@@ -210,7 +187,6 @@ export const Toaster = ({
                     : offset || VIEWPORT_OFFSET,
                 "--width": `${TOAST_WIDTH}px`,
                 "--gap": `${GAP}px`,
-                ...style,
               } as CSSProperties
             }
             onBlur={(event) => {
@@ -268,15 +244,10 @@ export const Toaster = ({
                   index={index}
                   toast={toast}
                   duration={toastOptions?.duration ?? duration}
-                  invert={invert}
                   visibleToasts={visibleToasts}
-                  closeIcon={toastOptions?.closeIcon}
+                  closeIcon={closeIcon}
                   interacting={interacting}
                   position={position}
-                  style={toastOptions?.style}
-                  unstyled={toastOptions?.unstyled}
-                  cancelButtonStyle={toastOptions?.cancelButtonStyle}
-                  actionButtonStyle={toastOptions?.actionButtonStyle}
                   removeToast={removeToast}
                   toasts={toasts.filter((t) => t.position == toast.position)}
                   heights={heights.filter((h) => h.position == toast.position)}

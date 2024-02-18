@@ -3,7 +3,6 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { Button, Stack } from "@mui/material";
 import { toast } from "mui-sonner";
-import CloseIcon from "@mui/icons-material/Close";
 
 export default function Home() {
   const successPromise = () => {
@@ -41,8 +40,8 @@ export default function Home() {
         <Button
           variant="contained"
           onClick={() =>
-            toast.loading("You have a new message!", {
-              closeIcon: <CloseIcon fontSize="small" />,
+            toast.info("You have a new message!", {
+              closeButton: true,
             })
           }
         >
