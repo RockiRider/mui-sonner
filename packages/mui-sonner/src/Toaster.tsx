@@ -1,6 +1,5 @@
 import React, {
   CSSProperties,
-  ReactNode,
   useCallback,
   useEffect,
   useMemo,
@@ -21,7 +20,7 @@ import {
   HeightT,
   ToastToDismiss,
   Position,
-  ToastOptions,
+  ToasterProps,
 } from "./types";
 import "./style.css";
 
@@ -37,21 +36,6 @@ function getDocumentDirection(): ToasterProps["dir"] {
   }
 
   return dirAttribute as ToasterProps["dir"];
-}
-
-interface ToasterProps {
-  position?: Position;
-  hotkey?: string[];
-  expand?: boolean;
-  duration?: number;
-  gap?: number;
-  visibleToasts?: number;
-  toastOptions?: ToastOptions;
-  offset?: string | number;
-  dir?: "rtl" | "ltr" | "auto";
-  loadingIcon?: ReactNode;
-  closeIcon?: ReactNode;
-  containerAriaLabel?: string;
 }
 
 export const Toaster = ({

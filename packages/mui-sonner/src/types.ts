@@ -18,7 +18,7 @@ export type PromiseData<ToastData = any> = PromiseExternalToast & {
   finally?: () => void | Promise<void>;
 };
 
-export interface ToastT {
+export type ToastT = {
   id: number | string;
   title?: string;
   severity?: ToastSeverity;
@@ -41,7 +41,22 @@ export interface ToastT {
   promise?: PromiseT;
   // actionButtonStyle?: React.CSSProperties;
   position?: Position;
-}
+};
+
+export type ToasterProps = {
+  position?: Position;
+  hotkey?: string[];
+  expand?: boolean;
+  duration?: number;
+  gap?: number;
+  visibleToasts?: number;
+  toastOptions?: ToastOptions;
+  offset?: string | number;
+  dir?: "rtl" | "ltr" | "auto";
+  loadingIcon?: ReactNode;
+  closeIcon?: ReactNode;
+  containerAriaLabel?: string;
+};
 
 export type Position =
   | "top-left"
