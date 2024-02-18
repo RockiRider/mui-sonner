@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import {
   useState,
   useRef,
@@ -7,7 +7,6 @@ import {
   useLayoutEffect,
   useCallback,
   ReactNode,
-  CSSProperties,
   Dispatch,
   SetStateAction,
 } from "react";
@@ -46,9 +45,7 @@ interface ToastProps {
   visibleToasts: number;
   expandByDefault: boolean;
   interacting: boolean;
-  style?: CSSProperties;
   duration?: number;
-  unstyled?: boolean;
   loadingIcon?: ReactNode;
   closeIcon?: ReactNode;
   closeButtonAriaLabel?: string;
@@ -59,7 +56,6 @@ interface ToastProps {
 
 export const Toast = ({
   toast,
-  unstyled,
   interacting,
   setHeights,
   visibleToasts,
@@ -69,7 +65,6 @@ export const Toast = ({
   expanded,
   removeToast,
   closeIcon: closeIconFromToaster,
-  style,
   duration: durationFromToaster,
   position,
   gap = GAP,
@@ -277,10 +272,8 @@ export const Toast = ({
           "--z-index": toasts.length - index,
           "--offset": `${removed ? offsetBeforeRemove : offset.current}px`,
           "--initial-height": expandByDefault ? "auto" : `${initialHeight}px`,
-          ...style,
-          ...toast.style,
           padding: 0,
-        } as React.CSSProperties
+        } as CSSProperties
       }
       onPointerDown={(event) => {
         if (disabled || !dismissible) return;

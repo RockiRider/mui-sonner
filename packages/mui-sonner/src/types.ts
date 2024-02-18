@@ -53,10 +53,7 @@ export interface ToastT {
   onDismiss?: (toast: ToastT) => void;
   onAutoClose?: (toast: ToastT) => void;
   promise?: PromiseT;
-  cancelButtonStyle?: React.CSSProperties;
   actionButtonStyle?: React.CSSProperties;
-  style?: React.CSSProperties;
-  descriptionClassName?: string;
   position?: Position;
 }
 
@@ -74,9 +71,7 @@ export interface HeightT {
 }
 
 export type ToastOptions = {
-  style?: React.CSSProperties;
   duration?: number;
-  unstyled?: boolean;
   closeButton?: boolean;
 };
 

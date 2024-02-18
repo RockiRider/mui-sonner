@@ -48,8 +48,6 @@ interface ToasterProps {
   visibleToasts?: number;
   closeIcon?: ReactNode;
   toastOptions?: ToastOptions;
-  className?: string;
-  style?: React.CSSProperties;
   offset?: string | number;
   dir?: "rtl" | "ltr" | "auto";
   loadingIcon?: ReactNode;
@@ -61,10 +59,8 @@ export const Toaster = ({
   hotkey = ["altKey", "KeyT"],
   expand = false,
   closeIcon,
-  className,
   offset,
   duration,
-  style,
   visibleToasts = VISIBLE_TOASTS_AMOUNT,
   toastOptions,
   dir = getDocumentDirection(),
@@ -195,7 +191,6 @@ export const Toaster = ({
             dir={dir === "auto" ? getDocumentDirection() : dir}
             tabIndex={-1}
             ref={listRef}
-            className={className}
             data-sonner-toaster
             data-y-position={y}
             data-x-position={x}
@@ -208,7 +203,6 @@ export const Toaster = ({
                     : offset || VIEWPORT_OFFSET,
                 "--width": `${TOAST_WIDTH}px`,
                 "--gap": `${GAP}px`,
-                ...style,
               } as CSSProperties
             }
             onBlur={(event) => {
@@ -270,8 +264,6 @@ export const Toaster = ({
                   closeIcon={closeIcon}
                   interacting={interacting}
                   position={position}
-                  style={toastOptions?.style}
-                  unstyled={toastOptions?.unstyled}
                   removeToast={removeToast}
                   toasts={toasts.filter((t) => t.position == toast.position)}
                   heights={heights.filter((h) => h.position == toast.position)}
