@@ -11,7 +11,6 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
-import { Loader } from "./assets";
 import {
   ToastT,
   HeightT,
@@ -30,6 +29,7 @@ import {
   AlertTitle,
   Button,
   IconButton,
+  Stack,
   Typography,
 } from "@mui/material";
 
@@ -38,7 +38,6 @@ interface ToastProps {
   toasts: ToastT[];
   index: number;
   expanded: boolean;
-  invert: boolean;
   heights: HeightT[];
   setHeights: Dispatch<SetStateAction<HeightT[]>>;
   removeToast: (toast: ToastT) => void;
@@ -59,7 +58,6 @@ interface ToastProps {
 }
 
 export const Toast = ({
-  invert: ToasterInvert,
   toast,
   unstyled,
   interacting,
@@ -75,7 +73,7 @@ export const Toast = ({
   duration: durationFromToaster,
   position,
   gap = GAP,
-  loadingIcon: loadingIconProp,
+  loadingIcon: loadingIconFromToaster,
   expandByDefault,
   closeButtonAriaLabel = "Close toast",
   severity = "info",
@@ -119,7 +117,6 @@ export const Toast = ({
       return prev + curr.height;
     }, 0);
   }, [heights, heightIndex]);
-  const invert = toast.invert || ToasterInvert;
   const disabled = toastType === "loading";
 
   offset.current = useMemo(
@@ -252,17 +249,6 @@ export const Toast = ({
     }
   }, [deleteToast, toast.delete]);
 
-  function getLoadingIcon() {
-    if (loadingIconProp) {
-      return (
-        <div className="sonner-loader" data-visible={toastType === "loading"}>
-          {loadingIconProp}
-        </div>
-      );
-    }
-    return <Loader visible={toastType === "loading"} />;
-  }
-
   return (
     <li
       aria-live={toast.important ? "assertive" : "polite"}
@@ -271,7 +257,7 @@ export const Toast = ({
       tabIndex={0}
       ref={toastRef}
       data-sonner-toast=""
-      data-styled={!Boolean(toast.jsx || toast.unstyled || unstyled)}
+      data-styled={!Boolean(toast.jsx || unstyled)}
       data-mounted={mounted}
       data-promise={Boolean(toast.promise)}
       data-removed={removed}
@@ -282,7 +268,6 @@ export const Toast = ({
       data-front={isFront}
       data-swiping={swiping}
       data-dismissible={dismissible}
-      data-invert={invert}
       data-swipe-out={swipeOut}
       data-expanded={Boolean(expanded || (expandByDefault && mounted))}
       style={
@@ -389,23 +374,18 @@ export const Toast = ({
           ) : undefined
         }
       >
-        {toast.title && <AlertTitle>{toast.title}</AlertTitle>}
-        <>
-          {toast.promise && (
-            <>
-              {toast.promise || toast.type === "loading"
-                ? getLoadingIcon()
-                : null}
-            </>
+        <Stack direction="row" gap={1}>
+          {(toast.promise || toast.type === "loading") &&
+            loadingIconFromToaster}
+          {toast.title && <AlertTitle>{toast.title}</AlertTitle>}
+        </Stack>
+        <div data-content="">
+          {toast.description && (
+            <div data-description="">
+              <Typography>{toast.description}</Typography>
+            </div>
           )}
-          <div data-content="">
-            {toast.description && (
-              <div data-description="">
-                <Typography>{toast.description}</Typography>
-              </div>
-            )}
-          </div>
-        </>
+        </div>
       </Alert>
     </li>
   );

@@ -5,7 +5,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Toaster } from "mui-sonner";
 import getLPTheme from "@styles/dark";
-import { Icon, PaletteMode } from "@mui/material";
+import { CircularProgress, Icon, PaletteMode } from "@mui/material";
 import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -28,6 +28,7 @@ export default function MyApp(props: AppProps) {
               <CloseIcon />
             </Icon>
           }
+          loadingIcon={<CircularProgress size={20} />}
         />
         <Component {...pageProps} />
       </ThemeProvider>

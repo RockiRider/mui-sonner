@@ -51,7 +51,6 @@ export interface ToastT {
   type?: ToastTypes;
   icon?: ReactNode;
   jsx?: ReactNode;
-  invert?: boolean;
   closeButton?: boolean;
   dismissible?: boolean;
   description?: ReactNode;
@@ -68,9 +67,6 @@ export interface ToastT {
   cancelButtonStyle?: React.CSSProperties;
   actionButtonStyle?: React.CSSProperties;
   style?: React.CSSProperties;
-  unstyled?: boolean;
-  className?: string;
-  classNames?: ToastClassnames;
   descriptionClassName?: string;
   position?: Position;
 }

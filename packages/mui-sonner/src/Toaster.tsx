@@ -40,7 +40,6 @@ function getDocumentDirection(): ToasterProps["dir"] {
 }
 
 interface ToasterProps {
-  invert?: boolean;
   position?: Position;
   hotkey?: string[];
   expand?: boolean;
@@ -58,7 +57,6 @@ interface ToasterProps {
 }
 
 export const Toaster = ({
-  invert = false,
   position = "bottom-right",
   hotkey = ["altKey", "KeyT"],
   expand = false,
@@ -268,7 +266,6 @@ export const Toaster = ({
                   index={index}
                   toast={toast}
                   duration={toastOptions?.duration ?? duration}
-                  invert={invert}
                   visibleToasts={visibleToasts}
                   closeIcon={closeIcon}
                   interacting={interacting}
