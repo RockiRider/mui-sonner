@@ -40,7 +40,7 @@ export default function Home() {
         <Button
           variant="contained"
           onClick={() =>
-            toast.loading("You have a new message!", {
+            toast.info("You have a new message!", {
               closeButton: true,
             })
           }
