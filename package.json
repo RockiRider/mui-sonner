@@ -11,7 +11,7 @@
     "deploy": "bash ./bin/deploy.sh mui-sonner"
   },
   "devDependencies": {
-    "@playwright/test": "^1.40.1",
+    "@playwright/test": "^1.41.2",
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
     "prettier": "^3.1.1",
