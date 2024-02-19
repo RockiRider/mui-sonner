@@ -46,10 +46,11 @@
         "@rollup/plugin-node-resolve": "^15.2.3",
         "@rollup/plugin-typescript": "^11.1.6",
         "@rollup/pluginutils": "^5.1.0",
+        "postcss": "^8.4.35",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "rollup": "^4.9.5",
         "rollup-plugin-banner2": "^1.2.2",
-        "rollup-plugin-copy": "^3.5.0"
+        "rollup-plugin-postcss": "^4.0.2"
     }
 }

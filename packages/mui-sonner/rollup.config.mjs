@@ -2,7 +2,7 @@
 import { defineConfig } from "rollup";
 import typescript from "@rollup/plugin-typescript";
 // import banner2 from 'rollup-plugin-banner2'
-import copy from "rollup-plugin-copy";
+import postcss from "rollup-plugin-postcss";
 
 const config = defineConfig([
   {
@@ -17,11 +17,13 @@ const config = defineConfig([
         declaration: true,
         sourceMap: false,
       }),
-      copy({
-        targets: [{ src: "src/style.css", dest: "dist" }],
+      postcss({
+        sourceMap: true,
+        extract: false,
+        minimize: true,
       }),
     ],
-    external: ["react", "react-dom", "@mui/material", /\.css$/u],
+    external: ["react", "react-dom", "@mui/material"],
   },
 ]);
 

@@ -3,15 +3,18 @@
   "private": true,
   "scripts": {
     "build": "turbo build --filter=mui-sonner --force",
+    "v:build": "turbo build --filter=example-vite --force",
+    "n:build": "turbo build --filter=example-next --force",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "preview": "turbo preview",
+    "vtest": "turbo test --filter=example-vite",
     "test": "npx playwright test",
     "deploy": "bash ./bin/deploy.sh mui-sonner"
   },
   "devDependencies": {
-    "@playwright/test": "^1.40.1",
+    "@playwright/test": "^1.41.2",
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
     "prettier": "^3.1.1",
