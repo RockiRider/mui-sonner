@@ -3,6 +3,8 @@
   "private": true,
   "scripts": {
     "build": "turbo build --filter=mui-sonner --force",
+    "v:build": "turbo build --filter=example-vite --force",
+    "n:build": "turbo build --filter=example-next --force",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
