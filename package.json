@@ -7,6 +7,7 @@
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "preview": "turbo preview",
+    "vtest": "turbo test --filter=example-vite",
     "test": "npx playwright test",
     "deploy": "bash ./bin/deploy.sh mui-sonner"
   },

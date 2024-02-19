@@ -21,7 +21,9 @@
     },
     "example-next#dev": {
       "dependsOn": ["^mui-sonner#build"]
+    },
+    "example-vite#test": {
+      "dependsOn": ["^mui-sonner#build"]
     }
-    
   }
 }
