@@ -46,7 +46,12 @@ const ActionButton = ({
   return (
     <Button
       variant="contained"
-      sx={{ p: 0.5, ...action.buttonSx }}
+      sx={[
+        { p: 0.5 },
+        ...(Array.isArray(action.buttonSx)
+          ? action.buttonSx
+          : [action.buttonSx]),
+      ]}
       onClick={(event) => {
         action?.onClick(event);
         if (event.defaultPrevented) return;
@@ -62,16 +67,21 @@ const CloseButton = ({
   closeButtonAriaLabel,
   deleteToast,
   closeIcon,
+  closeButtonSx,
 }: {
   deleteToast: () => void;
   closeIcon: ReactNode;
+  closeButtonSx?: SxProps<Theme>;
   closeButtonAriaLabel?: string;
 }) => {
   return (
     <IconButton
       size="small"
       color="inherit"
-      sx={{ p: 0.5 }}
+      sx={[
+        { p: 0.5 },
+        ...(Array.isArray(closeButtonSx) ? closeButtonSx : [closeButtonSx]),
+      ]}
       aria-label={closeButtonAriaLabel}
       onClick={() => {
         deleteToast();
