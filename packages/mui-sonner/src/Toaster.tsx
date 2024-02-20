@@ -50,6 +50,8 @@ export const Toaster = ({
   dir = getDocumentDirection(),
   gap,
   loadingIcon,
+  alertSx,
+  closeButtonSx,
   containerAriaLabel = "Notifications",
 }: ToasterProps) => {
   const [toasts, setToasts] = useState<ToastT[]>([]);
@@ -259,6 +261,7 @@ export const Toaster = ({
                   severity={toast.severity}
                   color={toast.color}
                   variant={toast.variant}
+                  alertSx={alertSx}
                 />
               ))}
           </ol>

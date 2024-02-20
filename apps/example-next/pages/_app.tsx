@@ -20,11 +20,10 @@ export default function MyApp(props: AppProps) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <Toaster
           closeIcon={
-            <Icon fontSize="small">
+            <Icon sx={{ width: 24, height: 24 }}>
               <CloseIcon />
             </Icon>
           }

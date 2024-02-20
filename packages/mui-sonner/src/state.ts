@@ -219,6 +219,20 @@ const toastFunction = (message: string, data?: ExternalToast) => {
 const basicToast = toastFunction;
 
 // We use `Object.assign` to maintain the correct types as we would lose them otherwise
+/**
+ * Used to create a toast as long as a Toaster is present in the application.
+ * You can create a toast from scratch or you can use the predefined methods:
+ * - `success`
+ * - `info`
+ * - `warning`
+ * - `error`
+ * - `promise`
+ * - `loading`
+ *
+ * You cannot have both an `action` and a `closeButton:true` at the same time, the toast will prioritise the action in this case.
+ *
+ * You can use the `dismiss` method to dismiss a toast by its id.
+ */
 export const toast = Object.assign(basicToast, {
   success: ToastState.success,
   info: ToastState.info,
