@@ -22,7 +22,6 @@ export type ToastAction = {
   label: ReactNode;
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   buttonSx?: SxProps;
-  containerSx?: SxProps;
 };
 
 export type ToastT = {

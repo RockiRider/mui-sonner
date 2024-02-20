@@ -45,7 +45,7 @@ const ActionButton = ({
   return (
     <Button
       variant="contained"
-      sx={action.buttonSx}
+      sx={{ p: 0.5, ...action.buttonSx }}
       onClick={(event) => {
         action?.onClick(event);
         if (event.defaultPrevented) return;
@@ -70,6 +70,7 @@ const CloseButton = ({
     <IconButton
       size="small"
       color="inherit"
+      sx={{ p: 0.5 }}
       aria-label={closeButtonAriaLabel}
       onClick={() => {
         deleteToast();
@@ -91,18 +92,7 @@ const AlertAction = ({
   closeIcon: ReactNode;
   closeButtonAriaLabel?: string;
 }) => {
-  if (toast.action && toast.closeButton) {
-    return (
-      <Stack direction="row" gap={1} sx={toast.action.containerSx}>
-        <ActionButton action={toast.action} deleteToast={deleteToast} />
-        <CloseButton
-          closeButtonAriaLabel={closeButtonAriaLabel}
-          deleteToast={deleteToast}
-          closeIcon={closeIcon}
-        />
-      </Stack>
-    );
-  } else if (toast.action) {
+  if (toast.action) {
     return <ActionButton action={toast.action} deleteToast={deleteToast} />;
   } else if (toast.closeButton) {
     return (
@@ -422,7 +412,12 @@ export const Toast = ({
       }}
     >
       <Alert
-        sx={{ ...alertSx, width: "100%" }}
+        sx={{
+          ...alertSx,
+          width: "100%",
+          "& .MuiAlert-action": { pl: 0, py: 0.5, pr: 1 },
+          "& .MuiAlert-icon": { py: 1 },
+        }}
         severity={severity}
         icon={toast.type === "loading" ? false : toast.icon}
         variant={isFront ? variant : expanded ? variant : "outlined"}

@@ -42,6 +42,7 @@ export default function Home() {
           onClick={() =>
             toast.info("You have a new message!", {
               closeButton: true,
+              duration: Infinity,
             })
           }
         >
@@ -49,7 +50,18 @@ export default function Home() {
         </Button>
         <Button
           variant="contained"
-          onClick={() => toast.success("Successfully updated!")}
+          onClick={() =>
+            toast.success("Successfully updated!", {
+              duration: 20000,
+              action: {
+                label: "Undo",
+                buttonSx: { color: "inherit", p: 0 },
+                onClick: () => {
+                  console.log("Info");
+                },
+              },
+            })
+          }
         >
           Success
         </Button>
