@@ -105,11 +105,13 @@ const AlertAction = ({
   } else if (toast.action) {
     return <ActionButton action={toast.action} deleteToast={deleteToast} />;
   } else if (toast.closeButton) {
-    <CloseButton
-      closeButtonAriaLabel={closeButtonAriaLabel}
-      deleteToast={deleteToast}
-      closeIcon={closeIcon}
-    />;
+    return (
+      <CloseButton
+        closeButtonAriaLabel={closeButtonAriaLabel}
+        deleteToast={deleteToast}
+        closeIcon={closeIcon}
+      />
+    );
   } else {
     return undefined;
   }
