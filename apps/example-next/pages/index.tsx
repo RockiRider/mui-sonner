@@ -55,7 +55,12 @@ export default function Home() {
               duration: 20000,
               action: {
                 label: "Undo",
-                buttonSx: { color: "inherit", p: 0 },
+                buttonSx: {
+                  color: "inherit",
+                  p: 0,
+                  height: 30,
+                  borderRadius: 0,
+                },
                 onClick: () => {
                   console.log("Info");
                 },
