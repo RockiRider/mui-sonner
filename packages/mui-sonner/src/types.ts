@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { AlertColor, SxProps } from "@mui/material";
+import { AlertColor, SxProps, Theme } from "@mui/material";
 
 export type ToastSeverity = AlertColor;
 export type ToastColor = AlertColor;
@@ -21,7 +21,7 @@ export type PromiseData<ToastData = any> = PromiseExternalToast & {
 export type ToastAction = {
   label: ReactNode;
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  buttonSx?: SxProps;
+  buttonSx?: SxProps<Theme>;
 };
 
 export type ToastT = {
@@ -58,7 +58,8 @@ export type ToasterProps = {
   loadingIcon?: ReactNode;
   closeIcon?: ReactNode;
   containerAriaLabel?: string;
-  alertSx?: SxProps;
+  alertSx?: SxProps<Theme>;
+  closeButtonSx?: SxProps<Theme>;
 };
 
 export type Position =

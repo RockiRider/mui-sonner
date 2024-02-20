@@ -32,6 +32,7 @@ import {
   IconButton,
   Stack,
   SxProps,
+  Theme,
   Typography,
 } from "@mui/material";
 
@@ -127,7 +128,7 @@ interface ToastProps {
   severity?: ToastSeverity;
   color?: ToastColor;
   variant?: ToastVariant;
-  alertSx?: SxProps;
+  alertSx?: SxProps<Theme>;
 }
 
 export const Toast = ({
@@ -412,12 +413,14 @@ export const Toast = ({
       }}
     >
       <Alert
-        sx={{
-          ...alertSx,
-          width: "100%",
-          "& .MuiAlert-action": { pl: 0, py: 0.5, pr: 1 },
-          "& .MuiAlert-icon": { py: 1 },
-        }}
+        sx={[
+          {
+            width: "100%",
+            "& .MuiAlert-action": { pl: 0, py: 0.5, pr: 1 },
+            "& .MuiAlert-icon": { py: 1 },
+          },
+          ...(Array.isArray(alertSx) ? alertSx : [alertSx]),
+        ]}
         severity={severity}
         icon={toast.type === "loading" ? false : toast.icon}
         variant={isFront ? variant : expanded ? variant : "outlined"}
