@@ -16,6 +16,8 @@ import {
   Position,
   ToastSeverity,
   ToastVariant,
+  ToastColor,
+  ToastAction,
 } from "./types";
 import {
   GAP,
@@ -29,8 +31,89 @@ import {
   Button,
   IconButton,
   Stack,
+  SxProps,
   Typography,
 } from "@mui/material";
+
+const ActionButton = ({
+  action,
+  deleteToast,
+}: {
+  action: ToastAction;
+  deleteToast: () => void;
+}) => {
+  return (
+    <Button
+      variant="contained"
+      sx={action.buttonSx}
+      onClick={(event) => {
+        action?.onClick(event);
+        if (event.defaultPrevented) return;
+        deleteToast();
+      }}
+    >
+      {action.label}
+    </Button>
+  );
+};
+
+const CloseButton = ({
+  closeButtonAriaLabel,
+  deleteToast,
+  closeIcon,
+}: {
+  deleteToast: () => void;
+  closeIcon: ReactNode;
+  closeButtonAriaLabel?: string;
+}) => {
+  return (
+    <IconButton
+      size="small"
+      color="inherit"
+      aria-label={closeButtonAriaLabel}
+      onClick={() => {
+        deleteToast();
+      }}
+    >
+      {closeIcon}
+    </IconButton>
+  );
+};
+
+const AlertAction = ({
+  toast,
+  deleteToast,
+  closeIcon,
+  closeButtonAriaLabel,
+}: {
+  toast: ToastT;
+  deleteToast: () => void;
+  closeIcon: ReactNode;
+  closeButtonAriaLabel?: string;
+}) => {
+  if (toast.action && toast.closeButton) {
+    return (
+      <Stack direction="row" gap={1} sx={toast.action.containerSx}>
+        <ActionButton action={toast.action} deleteToast={deleteToast} />
+        <CloseButton
+          closeButtonAriaLabel={closeButtonAriaLabel}
+          deleteToast={deleteToast}
+          closeIcon={closeIcon}
+        />
+      </Stack>
+    );
+  } else if (toast.action) {
+    return <ActionButton action={toast.action} deleteToast={deleteToast} />;
+  } else if (toast.closeButton) {
+    <CloseButton
+      closeButtonAriaLabel={closeButtonAriaLabel}
+      deleteToast={deleteToast}
+      closeIcon={closeIcon}
+    />;
+  } else {
+    return undefined;
+  }
+};
 
 interface ToastProps {
   toast: ToastT;
@@ -50,8 +133,9 @@ interface ToastProps {
   closeIcon?: ReactNode;
   closeButtonAriaLabel?: string;
   severity?: ToastSeverity;
-  color?: ToastSeverity;
+  color?: ToastColor;
   variant?: ToastVariant;
+  alertSx?: SxProps;
 }
 
 export const Toast = ({
@@ -74,6 +158,7 @@ export const Toast = ({
   severity = "info",
   variant = "filled",
   color,
+  alertSx,
 }: ToastProps) => {
   const [mounted, setMounted] = useState(false);
   const [removed, setRemoved] = useState(false);
@@ -335,36 +420,18 @@ export const Toast = ({
       }}
     >
       <Alert
-        sx={{ width: "100%" }}
+        sx={{ ...alertSx, width: "100%" }}
         severity={severity}
         icon={toast.type === "loading" ? false : toast.icon}
         variant={isFront ? variant : expanded ? variant : "outlined"}
         color={color}
         action={
-          toast.action ? (
-            <Button
-              variant="contained"
-              // style={toast.actionButtonStyle}
-              onClick={(event) => {
-                toast.action?.onClick(event);
-                if (event.defaultPrevented) return;
-                deleteToast();
-              }}
-            >
-              {toast.action.label}
-            </Button>
-          ) : toast.closeButton ? (
-            <IconButton
-              size="small"
-              color="inherit"
-              aria-label={closeButtonAriaLabel}
-              onClick={() => {
-                deleteToast();
-              }}
-            >
-              {closeIconFromToaster}
-            </IconButton>
-          ) : undefined
+          <AlertAction
+            toast={toast}
+            deleteToast={deleteToast}
+            closeIcon={closeIconFromToaster}
+            closeButtonAriaLabel={closeButtonAriaLabel}
+          />
         }
       >
         <Stack direction="row" gap={1}>
