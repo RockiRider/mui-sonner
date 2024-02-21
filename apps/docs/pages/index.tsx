@@ -3,6 +3,7 @@ import { Button, Stack } from "@mui/material";
 import Intro from "@features/home/Intro";
 import { toast } from "mui-sonner";
 import ToggleCustomTheme from "@features/theme/ThemeToggle";
+import Install from "@features/home/Install";
 
 export default function Home({
   toggleTheme,
@@ -15,6 +16,7 @@ export default function Home({
     <Container maxWidth="lg">
       <Stack width={1} alignItems="center" gap={1}>
         <Intro />
+        <Install />
         <Stack alignItems="center" gap={5}>
           <Button
             variant="contained"
