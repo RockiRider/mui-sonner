@@ -1,3 +1,4 @@
+import Link from "@components/Link";
 import { Card, Stack, Typography } from "@mui/material";
 
 const Intro = () => {
@@ -21,7 +22,8 @@ const Intro = () => {
           An opinionated toast library for Material UI and React
         </Typography>
         <Typography variant="body1" component="p">
-          Based on the original sonner
+          Based on the original{" "}
+          <Link href="https://sonner.emilkowal.ski/">sonner</Link>
         </Typography>
       </Stack>
     </Stack>

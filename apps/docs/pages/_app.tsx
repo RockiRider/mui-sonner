@@ -9,17 +9,28 @@ import { CircularProgress, Icon, PaletteMode } from "@mui/material";
 import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 
+const defaultTheme = createTheme({});
+
 export default function MyApp(props: AppProps) {
   const { Component, pageProps } = props;
   const [mode, setMode] = useState<PaletteMode>("dark");
-  const theme = createTheme(getLPTheme(mode));
+  const [showCustomTheme, setShowCustomTheme] = useState(true);
+  const customTheme = createTheme(getLPTheme(mode));
+
+  const toggleColorMode = () => {
+    setMode((prev) => (prev === "dark" ? "light" : "dark"));
+  };
+
+  const toggleCustomTheme = () => {
+    setShowCustomTheme((prev) => !prev);
+  };
 
   return (
     <AppCacheProvider {...props}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={showCustomTheme ? customTheme : defaultTheme}>
         <CssBaseline />
         <Toaster
           closeIcon={
@@ -29,7 +40,12 @@ export default function MyApp(props: AppProps) {
           }
           loadingIcon={<CircularProgress size={20} />}
         />
-        <Component {...pageProps} />
+        <Component
+          {...pageProps}
+          toggleTheme={toggleCustomTheme}
+          toggleColorMode={toggleColorMode}
+          showCustomTheme={showCustomTheme}
+        />
       </ThemeProvider>
     </AppCacheProvider>
   );

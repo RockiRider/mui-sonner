@@ -1,9 +1,18 @@
 import Container from "@mui/material/Container";
-import { Button, Stack } from "@mui/material";
+import { Button, PaletteMode, Stack, createTheme } from "@mui/material";
 import Intro from "@features/home/Intro";
 import { toast } from "mui-sonner";
+import ToggleCustomTheme from "@features/theme/ThemeToggle";
+import getLPTheme from "@styles/dark";
+import { useState } from "react";
 
-export default function Home() {
+export default function Home({
+  toggleTheme,
+  showCustomTheme,
+}: {
+  toggleTheme: () => void;
+  showCustomTheme: boolean;
+}) {
   return (
     <Container maxWidth="lg">
       <Intro />
@@ -92,6 +101,10 @@ export default function Home() {
           Dismiss all
         </Button>
       </Stack>
+      <ToggleCustomTheme
+        showCustomTheme={showCustomTheme}
+        toggleCustomTheme={toggleTheme}
+      />
     </Container>
   );
 }
