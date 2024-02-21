@@ -3,4 +3,7 @@ module.exports = {
   reactStrictMode: true,
   output: "export",
   transpilePackages: ["mui-sonner"],
+  images: {
+    unoptimized: true,
+  },
 };
