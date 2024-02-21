@@ -5,6 +5,7 @@ import { toast } from "mui-sonner";
 import ToggleCustomTheme from "@features/theme/ThemeToggle";
 import Install from "@features/home/Install";
 import Features from "@features/home/Features";
+import Usage from "@features/home/Usage";
 
 export default function Home({
   toggleTheme,
@@ -19,6 +20,7 @@ export default function Home({
         <Intro />
         <Features />
         <Install />
+        <Usage />
         <Stack alignItems="center" gap={5}>
           <Button
             variant="contained"

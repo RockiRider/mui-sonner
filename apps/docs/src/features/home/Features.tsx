@@ -22,6 +22,7 @@ const FEATURES_LIST = [
   "Pause on hover",
   "Headless Hooks",
   "Responsive",
+  "Minimized toasts",
   "Dismiss on drag",
 ];
 
