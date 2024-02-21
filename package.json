@@ -4,6 +4,7 @@
   "scripts": {
     "build": "turbo build --filter=mui-sonner --force",
     "v:build": "turbo build --filter=example-vite --force",
+    "docs:dev": "turbo dev --filter=docs",
     "docs:build": "turbo build --filter=docs",
     "docs:preview": "turbo preview --filter=docs",
     "dev": "turbo dev",

@@ -1,41 +1,12 @@
 import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 import { Button, Stack } from "@mui/material";
+import Intro from "@features/home/Intro";
 import { toast } from "mui-sonner";
 
 export default function Home() {
-  const successPromise = () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve("Success");
-      }, 2000);
-    });
-  };
-
-  const errorPromise = () => {
-    return new Promise((_, reject) => {
-      setTimeout(() => {
-        reject("Error");
-      }, 2000);
-    });
-  };
-
   return (
     <Container maxWidth="lg">
-      <Box
-        sx={{
-          my: 4,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
-          Material UI - Next.js example in TypeScript
-        </Typography>
-      </Box>
+      <Intro />
       <Stack alignItems="center" gap={5}>
         <Button
           variant="contained"
@@ -102,28 +73,6 @@ export default function Home() {
           }}
         >
           Custom
-        </Button>
-        <Button
-          variant="contained"
-          onClick={() =>
-            toast.promise(successPromise, {
-              loading: "Loading...",
-              success: "Loaded",
-            })
-          }
-        >
-          Promise Success
-        </Button>
-        <Button
-          variant="contained"
-          onClick={() =>
-            toast.promise(errorPromise, {
-              loading: "Loading...",
-              error: "Error",
-            })
-          }
-        >
-          Promise Error
         </Button>
         <Button
           variant="contained"

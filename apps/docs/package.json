@@ -17,10 +17,11 @@
         "@mui/icons-material": "latest",
         "@mui/material": "latest",
         "@mui/material-nextjs": "latest",
+        "copy-to-clipboard": "^3.3.3",
+        "mui-sonner": "*",
         "next": "latest",
         "react": "latest",
-        "react-dom": "latest",
-        "mui-sonner": "*"
+        "react-dom": "latest"
     },
     "devDependencies": {
         "@types/node": "latest",
