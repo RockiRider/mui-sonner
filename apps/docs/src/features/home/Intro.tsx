@@ -7,7 +7,7 @@ const Intro = () => {
       <Stack
         component={Card}
         sx={{
-          my: 20,
+          mt: 20,
           maxWidth: 800,
           p: 3,
           justifyContent: "center",

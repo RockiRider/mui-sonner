@@ -4,6 +4,7 @@ import Intro from "@features/home/Intro";
 import { toast } from "mui-sonner";
 import ToggleCustomTheme from "@features/theme/ThemeToggle";
 import Install from "@features/home/Install";
+import Features from "@features/home/Features";
 
 export default function Home({
   toggleTheme,
@@ -13,9 +14,10 @@ export default function Home({
   showCustomTheme: boolean;
 }) {
   return (
-    <Container maxWidth="lg">
-      <Stack width={1} alignItems="center" gap={1}>
+    <Container maxWidth="xl">
+      <Stack width={1} alignItems="center" gap={6}>
         <Intro />
+        <Features />
         <Install />
         <Stack alignItems="center" gap={5}>
           <Button
