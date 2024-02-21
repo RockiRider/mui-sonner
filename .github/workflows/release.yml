@@ -55,7 +55,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           custom_tag: v${{steps.publish.outputs.version}}
-          tag_prefix: vite-plugin-posthog_
+          tag_prefix: mui-sonner_
           
       - name: Create a GitHub release
         if: ${{ steps.publish.outputs.type }}
