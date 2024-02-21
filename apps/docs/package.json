@@ -18,6 +18,7 @@
         "@mui/material": "latest",
         "@mui/material-nextjs": "latest",
         "copy-to-clipboard": "^3.3.3",
+        "framer-motion": "^11.0.5",
         "mui-sonner": "*",
         "next": "latest",
         "react": "latest",
