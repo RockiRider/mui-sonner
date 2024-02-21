@@ -5,7 +5,7 @@ If you are not using MUI, you should use [sonner](https://www.npmjs.com/package/
 
 ## Features
 
-- **Avoids Context**: Like [sonner](https://www.npmjs.com/package/sonner), it doesn't use context to avoid unnecessary re-renders.
+- **Avoids Context**: Like [sonner](https://www.npmjs.com/package/sonner), it doesn't use context.
 - **Alerts**: The toast that is actually built around using the [Alert component from MUI](https://mui.com/material-ui/react-alert/), so it's easy to customize.
 - **Styling**: Leverages MUI components, meaning the toast and components inside it will use your already defined MUI theme.
 
