@@ -4,7 +4,8 @@
   "scripts": {
     "build": "turbo build --filter=mui-sonner --force",
     "v:build": "turbo build --filter=example-vite --force",
-    "docs:build": "turbo build --filter=docs --force",
+    "docs:build": "turbo build --filter=docs",
+    "docs:preview": "turbo preview --filter=docs",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
