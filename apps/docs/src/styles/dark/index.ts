@@ -462,7 +462,6 @@ export default function getLPTheme(mode: PaletteMode): ThemeOptions {
             ...(theme.palette.mode === "dark" && {
               backgroundColor: alpha(gray[900], 0.6),
             }),
-            padding: 16,
           }),
         },
       },

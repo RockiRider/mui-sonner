@@ -20,6 +20,7 @@ const Code = ({ code }: CodeProps) => {
     <Paper
       sx={{
         backgroundColor: desiredBgColor,
+        p: 2,
       }}
     >
       <Typography component="code" sx={{ color: desiredTextColor }}>
