@@ -1,6 +1,5 @@
-# Mui - Sonner
+[mui-sonner](https://mui-sonner.tsotne.co.uk/) is is a package that combines [sonner](https://www.npmjs.com/package/sonner) and [MUI](https://mui.com/) to achieve a simple, opinionated toast component for react.
 
-This is a package that combines [sonner](https://www.npmjs.com/package/sonner) and [MUI](https://mui.com/) to achieve a simple, opinionated toast component for react.
 If you are not using MUI, you should use [sonner](https://www.npmjs.com/package/sonner) directly.
 
 ## Features
@@ -13,7 +12,7 @@ If you are not using MUI, you should use [sonner](https://www.npmjs.com/package/
 
 `npm install mui-sonner`
 
-Add <Toaster /> to your app, it will be the place where all your toasts will be rendered. After that you can use toast() from anywhere in your app.
+Add <Toaster /> to your app, preferably quite high in the tree. After that you can use `toast()` from anywhere in your app.
 
 ```jsx
 import { Toaster, toast } from "mui-sonner";
