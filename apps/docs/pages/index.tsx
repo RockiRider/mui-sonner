@@ -8,6 +8,8 @@ import Features from "@features/home/Features";
 import Usage from "@features/home/Usage";
 import Types from "@features/home/Types";
 import Position from "@features/home/Position";
+import OtherOptions from "@features/home/OtherOptions";
+import Styling from "@features/home/Styling";
 
 export default function Home({
   toggleTheme,
@@ -25,6 +27,8 @@ export default function Home({
         <Usage />
         <Types />
         <Position />
+        <Styling />
+        <OtherOptions />
         <ToggleCustomTheme
           showCustomTheme={showCustomTheme}
           toggleCustomTheme={toggleTheme}
