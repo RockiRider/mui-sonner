@@ -18,7 +18,7 @@ const TYPES_DEMO: FuncData[] = [
 
 const Types = () => {
   return (
-    <Stack gap={2}>
+    <Stack gap={2} sx={{ mb: 10 }}>
       <Typography variant="h6">Types</Typography>
       <Typography>
         You can customise the type of toast you want to render, and pass in
