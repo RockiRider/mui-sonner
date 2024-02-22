@@ -19,7 +19,7 @@
     "example-vite#dev": {
       "dependsOn": ["^mui-sonner#build"]
     },
-    "example-next#dev": {
+    "docs#dev": {
       "dependsOn": ["^mui-sonner#build"]
     },
     "example-vite#test": {

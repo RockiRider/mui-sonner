@@ -10,6 +10,7 @@
       "paths": {
         "@components/*": ["src/components/*"],
         "@styles/*": ["src/styles/*"],
+        "@features/*": ["src/features/*"],
       }
     },
     "include": [

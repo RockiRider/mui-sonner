@@ -1,11 +1,11 @@
 {
-    "name": "example-next",
+    "name": "docs",
     "version": "0.1.0",
     "private": true,
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "preview": "next start -p 3000",
+        "preview": "npx serve out -p 3000",
         "lint": "next lint",
         "post-update": "echo \"codesandbox preview only, need an update\" && pnpm update --latest"
     },
@@ -17,10 +17,12 @@
         "@mui/icons-material": "latest",
         "@mui/material": "latest",
         "@mui/material-nextjs": "latest",
+        "copy-to-clipboard": "^3.3.3",
+        "framer-motion": "^11.0.5",
+        "mui-sonner": "*",
         "next": "latest",
         "react": "latest",
-        "react-dom": "latest",
-        "mui-sonner": "*"
+        "react-dom": "latest"
     },
     "devDependencies": {
         "@types/node": "latest",
