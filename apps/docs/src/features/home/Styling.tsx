@@ -1,8 +1,25 @@
 import FuncDisplay, { FuncData } from "@components/FuncDisplay";
 import Link from "@components/Link";
-import { Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 
-const STYLING_DEMO: FuncData[] = [];
+const STYLING_DEMO: FuncData[] = [
+  {
+    component: <Button variant="contained">For All Toasts</Button>,
+    codeString: `<Toaster alertSx={{p:2}}/>`,
+  },
+  {
+    component: <Button variant="contained">For Individual Toasts</Button>,
+    codeString: `toast("Custom type", {
+        action: {
+          label: "Undo",
+          onClick: () => {
+            alert("Undoing action");
+          },
+          buttonSx: {p: 5},
+        },
+      })`,
+  },
+];
 const Styling = () => {
   return (
     <Stack gap={2} width={1} sx={{ mb: 10 }}>
