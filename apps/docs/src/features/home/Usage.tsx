@@ -3,7 +3,7 @@ import { Stack, Typography } from "@mui/material";
 
 const Usage = () => {
   return (
-    <Stack gap={1} width={0.5}>
+    <Stack gap={1} width={1}>
       <Typography variant="h6">Usage</Typography>
       <Stack gap={2}>
         <Typography>
