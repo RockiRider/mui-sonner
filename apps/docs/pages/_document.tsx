@@ -19,7 +19,7 @@ export default function MyDocument(
     <Html lang="en">
       <Head>
         {/* PWA primary color */}
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/icon.ico" />
         <meta name="emotion-insertion-point" content="" />
         <DocumentHeadTags {...props} />
       </Head>
