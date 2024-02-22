@@ -104,7 +104,7 @@ const POSITION_DEMO: FuncData[] = [
 const Position = () => {
   return (
     <Stack gap={2} width={1} sx={{ mb: 10 }}>
-      <Typography variant="h6">Types</Typography>
+      <Typography variant="h6">Position</Typography>
       <Typography>
         Swipe direction changes depending on the position.
       </Typography>
