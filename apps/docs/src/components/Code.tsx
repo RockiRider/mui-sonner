@@ -46,7 +46,7 @@ const Code = ({ code }: CodeProps) => {
       }}
       onClick={onCopy}
     >
-      <Typography component="code" sx={{ color: desiredTextColor }}>
+      <Typography component="pre" sx={{ color: desiredTextColor }}>
         {code}
       </Typography>
       <IconButton

@@ -5,14 +5,76 @@ import { toast } from "mui-sonner";
 const TYPES_DEMO: FuncData[] = [
   {
     component: (
-      <Button
-        variant="contained"
-        onClick={() => toast("You have a new message!")}
-      >
+      <Button variant="contained" onClick={() => toast("Hello world!")}>
         Default
       </Button>
     ),
-    codeString: `toast("You have a new message!")`,
+    codeString: `toast("Hello world!")`,
+  },
+  {
+    component: (
+      <Button
+        variant="contained"
+        onClick={() => toast.success("Something went well!")}
+      >
+        Success
+      </Button>
+    ),
+    codeString: `toast.success("Something went well!")`,
+  },
+  {
+    component: (
+      <Button
+        variant="contained"
+        onClick={() => toast.error("Something went wrong!")}
+      >
+        Error
+      </Button>
+    ),
+    codeString: `toast.error("Something went wrong!")`,
+  },
+  {
+    component: (
+      <Button variant="contained" onClick={() => toast.warning("Warning!")}>
+        Warning
+      </Button>
+    ),
+    codeString: `toast.warning("Warning!")`,
+  },
+  {
+    component: (
+      <Button variant="contained" onClick={() => toast.info("Info!")}>
+        Info
+      </Button>
+    ),
+    codeString: `toast.info("Info!")`,
+  },
+  {
+    component: (
+      <Button
+        variant="contained"
+        onClick={() =>
+          toast("Custom type", {
+            action: {
+              label: "Undo",
+              onClick: () => {
+                alert("Undoing action");
+              },
+            },
+          })
+        }
+      >
+        Action
+      </Button>
+    ),
+    codeString: `toast("Custom type", {
+  action: {
+    label: "Undo",
+    onClick: () => {
+      alert("Undoing action");
+    }
+  },
+})`,
   },
 ];
 
