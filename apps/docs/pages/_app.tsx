@@ -3,11 +3,10 @@ import { AppProps } from "next/app";
 import { AppCacheProvider } from "@mui/material-nextjs/v14-pagesRouter";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Toaster } from "mui-sonner";
 import getLPTheme from "@styles/dark";
-import { CircularProgress, Icon, PaletteMode } from "@mui/material";
+import { PaletteMode } from "@mui/material";
 import { useState } from "react";
-import CloseIcon from "@mui/icons-material/Close";
+import CustomToaster from "@components/CustomToaster";
 
 const defaultTheme = createTheme({});
 
@@ -32,14 +31,7 @@ export default function MyApp(props: AppProps) {
       </Head>
       <ThemeProvider theme={showCustomTheme ? customTheme : defaultTheme}>
         <CssBaseline />
-        <Toaster
-          closeIcon={
-            <Icon sx={{ width: 24, height: 24 }}>
-              <CloseIcon />
-            </Icon>
-          }
-          loadingIcon={<CircularProgress size={20} />}
-        />
+        <CustomToaster />
         <Component
           {...pageProps}
           toggleTheme={toggleCustomTheme}

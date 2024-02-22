@@ -7,6 +7,7 @@ import Install from "@features/home/Install";
 import Features from "@features/home/Features";
 import Usage from "@features/home/Usage";
 import Types from "@features/home/Types";
+import Position from "@features/home/Position";
 
 export default function Home({
   toggleTheme,
@@ -23,6 +24,7 @@ export default function Home({
         <Install />
         <Usage />
         <Types />
+        <Position />
         <ToggleCustomTheme
           showCustomTheme={showCustomTheme}
           toggleCustomTheme={toggleTheme}
