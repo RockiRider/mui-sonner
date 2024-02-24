@@ -42,6 +42,9 @@ const Intro = () => {
             <Button variant="outlined">Github</Button>
           </NextLink>
         </Stack>
+        <Link href="/getting-started">
+          <Typography>Documentation</Typography>
+        </Link>
       </Stack>
     </Stack>
   );
