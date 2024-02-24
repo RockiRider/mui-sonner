@@ -8,6 +8,8 @@
     "moduleResolution": "Bundler",
     "allowJs": true,
     "jsx": "preserve",
-    "noEmit": true
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
   }
 }

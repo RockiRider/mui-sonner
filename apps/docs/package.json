@@ -5,9 +5,9 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
+        "postbuild": "next-sitemap",
         "preview": "npx serve out -p 3000",
-        "lint": "next lint",
-        "post-update": "echo \"codesandbox preview only, need an update\" && pnpm update --latest"
+        "lint": "next lint"
     },
     "dependencies": {
         "@emotion/cache": "latest",
@@ -21,6 +21,7 @@
         "framer-motion": "^11.0.5",
         "mui-sonner": "*",
         "next": "latest",
+        "next-sitemap": "^4.2.3",
         "react": "latest",
         "react-dom": "latest"
     },
