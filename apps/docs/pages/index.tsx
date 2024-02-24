@@ -11,7 +11,6 @@ import Position from "@features/home/Position";
 import OtherOptions from "@features/home/OtherOptions";
 import Styling from "@features/home/Styling";
 import Head from "next/head";
-import { GetStaticProps } from "next";
 
 export default function Home({
   toggleTheme,
