@@ -23,6 +23,7 @@ import {
   ToasterProps,
 } from "./types";
 import "./style.css";
+import { CircularProgress } from "@mui/material";
 
 function getDocumentDirection(): ToasterProps["dir"] {
   if (typeof window === "undefined") return "ltr";
@@ -42,16 +43,12 @@ export const Toaster = ({
   position = "bottom-right",
   hotkey = ["altKey", "KeyT"],
   expand = false,
-  closeIcon,
   offset,
   duration,
   visibleToasts = VISIBLE_TOASTS_AMOUNT,
   toastOptions,
   dir = getDocumentDirection(),
   gap,
-  loadingIcon,
-  alertSx,
-  closeButtonSx,
   containerAriaLabel = "Notifications",
 }: ToasterProps) => {
   const [toasts, setToasts] = useState<ToastT[]>([]);
@@ -245,9 +242,7 @@ export const Toaster = ({
                   key={toast.id}
                   index={index}
                   toast={toast}
-                  duration={toastOptions?.duration ?? duration}
                   visibleToasts={visibleToasts}
-                  closeIcon={closeIcon}
                   interacting={interacting}
                   position={position}
                   removeToast={removeToast}
@@ -256,12 +251,14 @@ export const Toaster = ({
                   setHeights={setHeights}
                   expandByDefault={expand}
                   gap={gap}
-                  loadingIcon={loadingIcon}
+                  duration={toastOptions?.duration ?? duration}
+                  closeIcon={toastOptions?.icons?.close}
+                  loadingIcon={toastOptions?.icons?.loading}
                   expanded={expanded}
                   severity={toast.severity}
                   color={toast.color}
                   variant={toast.variant}
-                  alertSx={alertSx}
+                  alertSx={toastOptions?.alertSx}
                 />
               ))}
           </ol>

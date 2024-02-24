@@ -55,11 +55,7 @@ export type ToasterProps = {
   toastOptions?: ToastOptions;
   offset?: string | number;
   dir?: "rtl" | "ltr" | "auto";
-  loadingIcon?: ReactNode;
-  closeIcon?: ReactNode;
   containerAriaLabel?: string;
-  alertSx?: SxProps<Theme>;
-  closeButtonSx?: SxProps<Theme>;
 };
 
 export type Position =
@@ -79,6 +75,17 @@ export interface HeightT {
 export type ToastOptions = {
   duration?: number;
   closeButton?: boolean;
+  alertSx?: SxProps<Theme>;
+  closeButtonSx?: SxProps<Theme>;
+  descriptionSx?: SxProps<Theme>;
+  icons?: {
+    loading?: ReactNode;
+    close?: ReactNode;
+    success?: ReactNode;
+    error?: ReactNode;
+    warning?: ReactNode;
+    info?: ReactNode;
+  };
 };
 
 export enum SwipeStateTypes {
