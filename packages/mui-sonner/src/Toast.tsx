@@ -18,6 +18,7 @@ import {
   ToastVariant,
   ToastColor,
   ToastAction,
+  ToastOptions,
 } from "./types";
 import {
   GAP,
@@ -132,13 +133,11 @@ interface ToastProps {
   expandByDefault: boolean;
   interacting: boolean;
   duration?: number;
-  loadingIcon?: ReactNode;
-  closeIcon?: ReactNode;
   closeButtonAriaLabel?: string;
   severity?: ToastSeverity;
   color?: ToastColor;
   variant?: ToastVariant;
-  alertSx?: SxProps<Theme>;
+  toastDefaults?: ToastOptions;
 }
 
 export const Toast = ({
@@ -151,17 +150,15 @@ export const Toast = ({
   toasts,
   expanded,
   removeToast,
-  closeIcon: closeIconFromToaster,
   duration: durationFromToaster,
   position,
   gap = GAP,
-  loadingIcon: loadingIconFromToaster,
   expandByDefault,
   closeButtonAriaLabel = "Close toast",
   severity = "info",
   variant = "filled",
   color,
-  alertSx,
+  toastDefaults,
 }: ToastProps) => {
   const [mounted, setMounted] = useState(false);
   const [removed, setRemoved] = useState(false);
@@ -332,6 +329,13 @@ export const Toast = ({
     }
   }, [deleteToast, toast.delete]);
 
+  const icon =
+    toast.type === "loading"
+      ? false
+      : toast.icon
+        ? toast.icon
+        : toastDefaults?.icons?.[severity];
+
   return (
     <li
       aria-live={toast.important ? "assertive" : "polite"}
@@ -429,24 +433,26 @@ export const Toast = ({
             "& .MuiAlert-action": { pl: 0, py: 0.5, pr: 1 },
             "& .MuiAlert-icon": { py: 1 },
           },
-          ...(Array.isArray(alertSx) ? alertSx : [alertSx]),
+          ...(Array.isArray(toastDefaults?.alertSx)
+            ? toastDefaults?.alertSx
+            : [toastDefaults?.alertSx]),
         ]}
         severity={severity}
-        icon={toast.type === "loading" ? false : toast.icon}
+        icon={icon}
         variant={isFront ? variant : expanded ? variant : "outlined"}
         color={color}
         action={
           <AlertAction
             toast={toast}
             deleteToast={deleteToast}
-            closeIcon={closeIconFromToaster}
+            closeIcon={toastDefaults?.icons?.close}
             closeButtonAriaLabel={closeButtonAriaLabel}
           />
         }
       >
         <Stack direction="row" gap={1}>
           {(toast.promise || toast.type === "loading") &&
-            loadingIconFromToaster}
+            toastDefaults?.icons?.loading}
           {toast.title && <AlertTitle>{toast.title}</AlertTitle>}
         </Stack>
         <div data-content="">

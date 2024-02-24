@@ -23,7 +23,6 @@ import {
   ToasterProps,
 } from "./types";
 import "./style.css";
-import { CircularProgress } from "@mui/material";
 
 function getDocumentDirection(): ToasterProps["dir"] {
   if (typeof window === "undefined") return "ltr";
@@ -252,13 +251,11 @@ export const Toaster = ({
                   expandByDefault={expand}
                   gap={gap}
                   duration={toastOptions?.duration ?? duration}
-                  closeIcon={toastOptions?.icons?.close}
-                  loadingIcon={toastOptions?.icons?.loading}
                   expanded={expanded}
                   severity={toast.severity}
                   color={toast.color}
                   variant={toast.variant}
-                  alertSx={toastOptions?.alertSx}
+                  toastDefaults={toastOptions}
                 />
               ))}
           </ol>
