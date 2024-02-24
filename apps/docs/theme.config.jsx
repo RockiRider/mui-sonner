@@ -24,5 +24,4 @@ export default {
       </span>
     ),
   },
-  // ... other theme options
 };
