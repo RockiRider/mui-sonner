@@ -1,7 +1,6 @@
 import Container from "@mui/material/Container";
-import { Button, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import Intro from "@features/home/Intro";
-import { toast } from "mui-sonner";
 import ToggleCustomTheme from "@features/theme/ThemeToggle";
 import Install from "@features/home/Install";
 import Features from "@features/home/Features";
