@@ -459,7 +459,15 @@ export const Toast = ({
           {toast.description && (
             <div data-description="">
               {typeof toast.description === "string" ? (
-                <Typography>{toast.description}</Typography>
+                <Typography
+                  sx={[
+                    ...(Array.isArray(toastDefaults?.descriptionSx)
+                      ? toastDefaults?.descriptionSx
+                      : [toastDefaults?.descriptionSx]),
+                  ]}
+                >
+                  {toast.description}
+                </Typography>
               ) : (
                 toast.description
               )}
