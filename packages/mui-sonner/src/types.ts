@@ -32,7 +32,7 @@ export type ToastT = {
   variant?: ToastVariant;
   type?: ToastTypes;
   icon?: ReactNode;
-  showIcon?: false;
+  hideIcon?: boolean;
   closeButton?: boolean;
   dismissible?: boolean;
   description?: ReactNode;

@@ -345,7 +345,7 @@ export const Toast = ({
           ...formatSx(toastDefaults?.alertSx),
         ]}
         severity={severity}
-        icon={toast.showIcon === false ? false : selectedIcon}
+        icon={toast.hideIcon ? false : selectedIcon}
         variant={isFront ? variant : expanded ? variant : "outlined"}
         color={color}
         action={

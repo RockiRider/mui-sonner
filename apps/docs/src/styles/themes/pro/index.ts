@@ -109,7 +109,6 @@ const getDesignTokens = (mode: PaletteMode) => ({
     },
   },
   typography: {
-    fontFamily: ['"Inter", "sans-serif"'].join(","),
     h1: {
       fontSize: 60,
       fontWeight: 600,
@@ -192,15 +191,6 @@ export default function getProTheme(mode: PaletteMode): ThemeOptions {
               backgroundColor: gray[900],
               borderColor: gray[800],
             }),
-          }),
-        },
-      },
-      MuiAlert: {
-        styleOverrides: {
-          message: ({ theme }) => ({
-            fontWeight: 500,
-            fontSize: 14,
-            lineHeight: "20px",
           }),
         },
       },

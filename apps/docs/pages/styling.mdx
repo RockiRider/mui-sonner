@@ -1,33 +1,65 @@
+import { Callout } from 'nextra/components'
+
 # Styling
 
 Styling can be done in a few different ways. We will run through all the options here.
 
 ## Styling with the MUI Theme
 Styling can be done globally via the MUI theme. This way every toast will have the same styling.
+MUI lets you target the different variants of the toast, so you can style them differently. 
+For example you can style all the filled success toasts to have a red background color.
 
 ```jsx
-
 const theme = createTheme({
-  components: {
-    MuiAlert: {
-      styleOverrides: {
-        root: {
-          backgroundColor: 'red',
+    components: {
+        MuiAlert: {
+            styleOverrides: {
+                filledSuccess: {
+                    backgroundColor: "red",
+                },
+            },
         },
-      },
     },
-  },
 });
 ```
+ 
+<Callout type="warning" emoji="⚠️">This will change the styling of all the `Alert` components in your app, not just the toasts.</Callout>
 
 ## Styling with the Toaster
 
-Styling can be done globally via `toastOptions`, this way every toast will have the same styling.
+Styling can be done globally via `toastOptions`, this way every toast will have the same styling. 
+- You can style the `Alert` component for all toasts
+- You can style the `CloseButton` `ActionButton` and `Description` for all different types of toasts.
 
 ```jsx
 <Toaster
   toastOptions={{
- 
+    alertSx: {
+        backgroundColor: "red",
+    },
+    success:{
+        closeButtonSx: {
+            color: "red",
+        }
+        actionButtonSx: {
+            color: "red",
+        }
+        descriptionSx: {
+            color: "red",
+        }  
+    },
+    loading:{
+        closeButtonSx: {
+            color: "red",
+        }
+        actionButtonSx: {
+            color: "red",
+        }
+        descriptionSx: {
+            color: "red",
+        }  
+    }
+    // ... and so on
   }}
 />
 ```
@@ -41,16 +73,18 @@ toast('Hello World', {
 
 ## Changing Icons
 
-You can change the default icons using the `icons` prop:
+You can change the default icons using the `toasterOptions` on the `Toaster` component. This will change the default icons for all toasts, for their respective toast types.
 
 ```jsx
 <Toaster
-  icons={{
-    success: <SuccessIcon />,
-    info: <InfoIcon />,
-    warning: <WarningIcon />,
-    error: <ErrorIcon />,
-    loading: <LoadingIcon />,
+  toasterOptions={{
+    success: {
+        icon: <SuccessIcon/>
+    },
+    info: {
+        icon: <InfoIcon/>
+    },
+    // ... and so on
   }}
 />
 ```
@@ -60,5 +94,13 @@ You can also set an icon for each toast:
 ```jsx
 toast('Hello World', {
   icon: <Icon />,
+});
+```
+
+You can also set a toast to hide the icon:
+
+```jsx
+toast('Hello World', {
+  hideIcon: true,
 });
 ```

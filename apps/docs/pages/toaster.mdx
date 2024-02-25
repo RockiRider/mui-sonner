@@ -1,6 +1,11 @@
+import { Callout } from 'nextra/components'
+
 # Toaster
 
 This component renders all the toasts, you can place it anywhere in your app.
+
+<Callout type="warning" emoji="⚠️">Ensure there is only 1 `Toaster` component rendered in your app at all times</Callout>
+
 
 ## Customization
 
@@ -32,10 +37,13 @@ You can customzie all toasts at once with `toastOptions` prop. These options wil
 ```jsx
 <Toaster
   toastOptions={{
-  
+    alertSx: {
+        backgroundColor: "red",
+    },
   }}
 />
 ```
+Check out the [styling](/styling) documentation for all available options.
 
 ### dir
 
@@ -57,9 +65,7 @@ Changes the directionality of the toast's text.
 | offset                |                                              Offset from the edges of the screen.                                               |                              `32px` |
 | dir                   |                                                 Directionality of toast's text                                                  |                               `ltr` |
 | hotkey                |                                   Keyboard shortcut that will move focus to the toaster area.                                   |                         `⌥/alt + T` |
-| invert                |                                            Dark toasts in light mode and vice versa.                                            |                             `false` |
 | toastOptions          |               These will act as default options for all toasts. See [toast()](/toast) for all available options.                |                              `4000` |
 | gap                   |                                                Gap between toasts when expanded (px value)                                      |                                `14` |
 | loadingIcon           |                                                Changes the default loading icon                                                 |                                 `-` |
 | pauseWhenPageIsHidden | Pauses toast timers when the page is hidden, e.g., when the tab is backgrounded, the browser is minimized, or the OS is locked. |                             `false` |
-| icons                 |                                                    Changes the default icons                                                    |                                 `-` |

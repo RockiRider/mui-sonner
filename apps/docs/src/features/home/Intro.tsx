@@ -33,7 +33,8 @@ const Intro = () => {
             onClick={() =>
               toast("MUI Sonner", {
                 description: "A toast library for MUI & React.",
-                showIcon: false,
+                // showIcon: false,
+                icon: "🚀",
               })
             }
           >

@@ -17,13 +17,13 @@ toast('Hello World!');
 Or provide an object as the second argument with more options. They will overwrite the options passed to [`<Toaster />`](/toaster) if you have provided any.
 
 ```jsx
-import { toast } from 'sonner';
+import { toast } from 'mui-sonner';
 
 toast('My toast', {
-  className: 'my-classname',
   description: 'My description',
-  duration: 5000,
+  duration: Infinity,
   icon: <MyIcon />,
+  closeButton: true,
 });
 ```
 
@@ -58,18 +58,6 @@ toast('My action toast', {
 });
 ```
 
-### Cancel
-
-Renders a secondary button, clicking it will close the toast and run the callback passed via `onClick`.
-
-```jsx
-toast('My cancel toast', {
-  cancel: {
-    label: 'Cancel',
-    onClick: () => console.log('Cancel!'),
-  },
-});
-```
 
 ### Promise
 
@@ -92,26 +80,6 @@ Renders a toast with a loading spinner. Useful when you want to handle various s
 
 ```jsx
 toast.loading('Loading data');
-```
-
-### Custom
-
-You can pass jsx as the first argument instead of a string to render a custom toast while maintaining default styling.
-
-```jsx
-toast(<div>A custom toast with default styling</div>, { duration: 5000 });
-```
-
-### Headless
-
-Use it to render an unstyled toast with custom jsx while maintaining the functionality. This function receives the `Toast` as an argument, giving you access to all properties.
-
-```jsx
-toast.custom((t) => (
-  <div>
-    This is a custom component <button onClick={() => toast.dismiss(t)}>close</button>
-  </div>
-));
 ```
 
 ### Dynamic Position
