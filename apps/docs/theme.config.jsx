@@ -8,8 +8,15 @@ export default {
   useNextSeoProps() {
     return {
       titleTemplate: "%s | MUI Sonner",
+      description: "MUI Sonner",
+      openGraph: {
+        description: "A toast component for MUI & React",
+        siteName: "MUI Sonner",
+      },
+      twitter: {},
     };
   },
+  head: <></>,
   feedback: {
     content: null,
   },
