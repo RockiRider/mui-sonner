@@ -5,7 +5,7 @@ interface TickPairProps {
 }
 const TickPair = ({ text }: TickPairProps) => {
   return (
-    <Stack gap={1} direction="row">
+    <Stack gap={1} direction="row" alignItems="center">
       <Icon>
         <DoneIcon />
       </Icon>
@@ -15,15 +15,18 @@ const TickPair = ({ text }: TickPairProps) => {
 };
 
 const FEATURES_LIST = [
-  "Easy to use",
+  "Easy to use & setup",
   "Accessible",
-  "Uses your theme",
+  "Uses your MUI theme",
   "Lightweight",
   "Pause on hover",
-  "Headless Hooks",
+  "Supports Emojis",
+  "RTL support",
   "Responsive",
-  "Minimized toasts",
   "Dismiss on drag",
+  "Stacked notifications",
+  "Promise API",
+  "Possibility to update a toast",
 ];
 
 const Features = () => {
@@ -37,7 +40,7 @@ const Features = () => {
     >
       <Typography variant="h5">Features</Typography>
       <Box
-        sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 1 }}
+        sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 2 }}
       >
         {FEATURES_LIST.map((feature) => (
           <TickPair text={feature} key={feature} />
