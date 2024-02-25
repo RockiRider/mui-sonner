@@ -32,7 +32,8 @@ const Intro = () => {
             variant="contained"
             onClick={() =>
               toast("MUI Sonner", {
-                description: "A simple toast library for MUI & React.",
+                description: "A toast library for MUI & React.",
+                showIcon: false,
               })
             }
           >

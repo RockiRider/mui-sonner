@@ -238,7 +238,7 @@ export const Toast = ({
     }
   }, [deleteToast, toast.delete]);
 
-  const icon =
+  const selectedIcon =
     toast.type === "loading"
       ? false
       : toast.icon
@@ -345,7 +345,7 @@ export const Toast = ({
           ...formatSx(toastDefaults?.alertSx),
         ]}
         severity={severity}
-        icon={icon}
+        icon={toast.showIcon === false ? false : selectedIcon}
         variant={isFront ? variant : expanded ? variant : "outlined"}
         color={color}
         action={

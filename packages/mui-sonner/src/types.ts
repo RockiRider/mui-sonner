@@ -24,8 +24,6 @@ export type ToastAction = {
   buttonSx?: SxProps<Theme>;
 };
 
-export type BaseToast = {};
-
 export type ToastT = {
   id: number | string;
   title?: string;
@@ -34,6 +32,7 @@ export type ToastT = {
   variant?: ToastVariant;
   type?: ToastTypes;
   icon?: ReactNode;
+  showIcon?: false;
   closeButton?: boolean;
   dismissible?: boolean;
   description?: ReactNode;
