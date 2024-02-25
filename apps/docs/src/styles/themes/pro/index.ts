@@ -195,6 +195,15 @@ export default function getProTheme(mode: PaletteMode): ThemeOptions {
           }),
         },
       },
+      MuiAlert: {
+        styleOverrides: {
+          message: ({ theme }) => ({
+            fontWeight: 500,
+            fontSize: 14,
+            lineHeight: "20px",
+          }),
+        },
+      },
       MuiAccordionSummary: {
         styleOverrides: {
           root: ({ theme }) => ({

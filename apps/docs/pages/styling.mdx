@@ -1,0 +1,64 @@
+# Styling
+
+Styling can be done in a few different ways. We will run through all the options here.
+
+## Styling with the MUI Theme
+Styling can be done globally via the MUI theme. This way every toast will have the same styling.
+
+```jsx
+
+const theme = createTheme({
+  components: {
+    MuiAlert: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'red',
+        },
+      },
+    },
+  },
+});
+```
+
+## Styling with the Toaster
+
+Styling can be done globally via `toastOptions`, this way every toast will have the same styling.
+
+```jsx
+<Toaster
+  toastOptions={{
+ 
+  }}
+/>
+```
+## Styling with the toast
+You can also use the same props when calling `toast` to style a specific toast.
+
+```jsx
+toast('Hello World', {
+});
+```
+
+## Changing Icons
+
+You can change the default icons using the `icons` prop:
+
+```jsx
+<Toaster
+  icons={{
+    success: <SuccessIcon />,
+    info: <InfoIcon />,
+    warning: <WarningIcon />,
+    error: <ErrorIcon />,
+    loading: <LoadingIcon />,
+  }}
+/>
+```
+
+You can also set an icon for each toast:
+
+```jsx
+toast('Hello World', {
+  icon: <Icon />,
+});
+```

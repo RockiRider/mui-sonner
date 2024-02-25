@@ -6,9 +6,7 @@ const Usage = () => {
     <Stack gap={1} width={1}>
       <Typography variant="h6">Usage</Typography>
       <Stack gap={2}>
-        <Typography>
-          Add Toaster to your app - make sure its placed at the top!
-        </Typography>
+        <Typography>Add Toaster to your app.</Typography>
         <Code code="<div><Toaster/></div" />
       </Stack>
       <Stack gap={2}>
