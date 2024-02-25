@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build --filter=mui-sonner --force",
+    "v:dev": "turbo dev --filter=example-vite",
     "v:build": "turbo build --filter=example-vite --force",
     "docs:dev": "turbo dev --filter=docs",
     "docs:build": "turbo build --filter=docs",
