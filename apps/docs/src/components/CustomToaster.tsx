@@ -14,7 +14,7 @@ const CustomToaster = (props: CustomToasterProps) => {
           </Icon>
         ),
         loading: {
-          icon: <CircularProgress size={20} />,
+          icon: <CircularProgress size={20} color="secondary" />,
         },
       }}
     />

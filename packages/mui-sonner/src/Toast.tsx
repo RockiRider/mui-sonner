@@ -24,7 +24,7 @@ import {
   TIME_BEFORE_UNMOUNT,
   TOAST_LIFETIME,
 } from "./constants";
-import { Alert, AlertTitle, Stack, Typography } from "@mui/material";
+import { Alert, AlertTitle, Typography } from "@mui/material";
 import { formatSx } from "./utilts";
 import AlertAction from "./AlertAction";
 
@@ -240,7 +240,7 @@ export const Toast = ({
 
   const selectedIcon =
     toast.type === "loading"
-      ? false
+      ? toastDefaults?.loading?.icon
       : toast.icon
         ? toast.icon
         : toastDefaults?.[severity]?.icon;
@@ -359,26 +359,20 @@ export const Toast = ({
           />
         }
       >
-        <Stack direction="row" gap={1}>
-          {(toast.promise || toast.type === "loading") &&
-            toastDefaults?.loading?.icon}
-          {toast.title && <AlertTitle>{toast.title}</AlertTitle>}
-        </Stack>
-        <div data-content="">
-          {toast.description && (
-            <div data-description="">
-              {typeof toast.description === "string" ? (
-                <Typography
-                  sx={formatSx(toastDefaults?.[severity]?.descriptionSx)}
-                >
-                  {toast.description}
-                </Typography>
-              ) : (
-                toast.description
-              )}
-            </div>
-          )}
-        </div>
+        {toast.title && <AlertTitle>{toast.title}</AlertTitle>}
+        {toast.description && (
+          <div data-description="">
+            {typeof toast.description === "string" ? (
+              <Typography
+                sx={formatSx(toastDefaults?.[severity]?.descriptionSx)}
+              >
+                {toast.description}
+              </Typography>
+            ) : (
+              toast.description
+            )}
+          </div>
+        )}
       </Alert>
     </li>
   );
