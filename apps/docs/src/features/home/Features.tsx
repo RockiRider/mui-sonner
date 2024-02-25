@@ -1,4 +1,4 @@
-import { Box, Card, Icon, Paper, Stack, Typography } from "@mui/material";
+import { Box, Icon, Paper, Stack, Typography } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 interface TickPairProps {
   text: string;
