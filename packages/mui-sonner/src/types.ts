@@ -24,6 +24,8 @@ export type ToastAction = {
   buttonSx?: SxProps<Theme>;
 };
 
+export type BaseToast = {};
+
 export type ToastT = {
   id: number | string;
   title?: string;
@@ -72,20 +74,20 @@ export interface HeightT {
   position: Position;
 }
 
+type VariantOptions = {
+  icon: ReactNode;
+  closeButtonSx?: SxProps<Theme>;
+  actionButtonSx?: SxProps<Theme>;
+  descriptionSx?: SxProps<Theme>;
+};
+
 export type ToastOptions = {
+  [key in ToastTypes]?: VariantOptions;
+} & {
   duration?: number;
   closeButton?: boolean;
+  closeIcon?: ReactNode;
   alertSx?: SxProps<Theme>;
-  closeButtonSx?: SxProps<Theme>;
-  descriptionSx?: SxProps<Theme>;
-  icons?: {
-    loading?: ReactNode;
-    close?: ReactNode;
-    success?: ReactNode;
-    error?: ReactNode;
-    warning?: ReactNode;
-    info?: ReactNode;
-  };
 };
 
 export enum SwipeStateTypes {

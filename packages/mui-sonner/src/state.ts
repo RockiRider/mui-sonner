@@ -120,7 +120,7 @@ class Observer {
   };
 
   loading = (message: string, data?: ExternalToast) => {
-    return this.create({ ...data, type: "loading", message });
+    return this.create({ severity: "info", ...data, type: "loading", message });
   };
 
   promise = <ToastData>(
@@ -134,6 +134,7 @@ class Observer {
     let id: string | number | undefined = undefined;
     if (data.loading !== undefined) {
       id = this.create({
+        severity: "info",
         ...data,
         promise,
         type: "loading",
@@ -162,7 +163,13 @@ class Observer {
             ? // @ts-expect-error
               data.description(`HTTP error! status: ${response.status}`)
             : data.description;
-        this.create({ id, type: "error", message, description });
+        this.create({
+          id,
+          type: "error",
+          severity: "error",
+          message,
+          description,
+        });
       } else if (data.success !== undefined) {
         shouldDismiss = false;
         const message =
@@ -173,7 +180,13 @@ class Observer {
           typeof data.description === "function"
             ? data.description(response)
             : data.description;
-        this.create({ id, type: "success", message, description });
+        this.create({
+          id,
+          type: "success",
+          severity: "success",
+          message,
+          description,
+        });
       }
     })
       .catch((error) => {
@@ -185,7 +198,13 @@ class Observer {
             typeof data.description === "function"
               ? data.description(error)
               : data.description;
-          this.create({ id, type: "error", message, description });
+          this.create({
+            id,
+            type: "error",
+            severity: "error",
+            message,
+            description,
+          });
         }
       })
       .finally(() => {

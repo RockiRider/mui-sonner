@@ -6,7 +6,6 @@ import {
   useEffect,
   useLayoutEffect,
   useCallback,
-  ReactNode,
   Dispatch,
   SetStateAction,
 } from "react";
@@ -17,7 +16,6 @@ import {
   ToastSeverity,
   ToastVariant,
   ToastColor,
-  ToastAction,
   ToastOptions,
 } from "./types";
 import {
@@ -26,98 +24,9 @@ import {
   TIME_BEFORE_UNMOUNT,
   TOAST_LIFETIME,
 } from "./constants";
-import {
-  Alert,
-  AlertTitle,
-  Button,
-  IconButton,
-  Stack,
-  SxProps,
-  Theme,
-  Typography,
-} from "@mui/material";
-
-const ActionButton = ({
-  action,
-  deleteToast,
-}: {
-  action: ToastAction;
-  deleteToast: () => void;
-}) => {
-  return (
-    <Button
-      variant="contained"
-      sx={[
-        { p: 0.5 },
-        ...(Array.isArray(action.buttonSx)
-          ? action.buttonSx
-          : [action.buttonSx]),
-      ]}
-      onClick={(event) => {
-        action?.onClick(event);
-        if (event.defaultPrevented) return;
-        deleteToast();
-      }}
-    >
-      {action.label}
-    </Button>
-  );
-};
-
-const CloseButton = ({
-  closeButtonAriaLabel,
-  deleteToast,
-  closeIcon,
-  closeButtonSx,
-}: {
-  deleteToast: () => void;
-  closeIcon: ReactNode;
-  closeButtonSx?: SxProps<Theme>;
-  closeButtonAriaLabel?: string;
-}) => {
-  return (
-    <IconButton
-      size="small"
-      color="inherit"
-      sx={[
-        { p: 0.5 },
-        ...(Array.isArray(closeButtonSx) ? closeButtonSx : [closeButtonSx]),
-      ]}
-      aria-label={closeButtonAriaLabel}
-      onClick={() => {
-        deleteToast();
-      }}
-    >
-      {closeIcon}
-    </IconButton>
-  );
-};
-
-const AlertAction = ({
-  toast,
-  deleteToast,
-  closeIcon,
-  closeButtonAriaLabel,
-}: {
-  toast: ToastT;
-  deleteToast: () => void;
-  closeIcon: ReactNode;
-  closeButtonAriaLabel?: string;
-}) => {
-  if (toast.action) {
-    return <ActionButton action={toast.action} deleteToast={deleteToast} />;
-  } else if (toast.closeButton) {
-    return (
-      <CloseButton
-        closeButtonAriaLabel={closeButtonAriaLabel}
-        deleteToast={deleteToast}
-        closeIcon={closeIcon}
-      />
-    );
-  } else {
-    return undefined;
-  }
-};
+import { Alert, AlertTitle, Stack, Typography } from "@mui/material";
+import { formatSx } from "./utilts";
+import AlertAction from "./AlertAction";
 
 interface ToastProps {
   toast: ToastT;
@@ -334,7 +243,7 @@ export const Toast = ({
       ? false
       : toast.icon
         ? toast.icon
-        : toastDefaults?.icons?.[severity];
+        : toastDefaults?.[severity]?.icon;
 
   return (
     <li
@@ -433,9 +342,7 @@ export const Toast = ({
             "& .MuiAlert-action": { pl: 0, py: 0.5, pr: 1 },
             "& .MuiAlert-icon": { py: 1 },
           },
-          ...(Array.isArray(toastDefaults?.alertSx)
-            ? toastDefaults?.alertSx
-            : [toastDefaults?.alertSx]),
+          ...formatSx(toastDefaults?.alertSx),
         ]}
         severity={severity}
         icon={icon}
@@ -445,14 +352,16 @@ export const Toast = ({
           <AlertAction
             toast={toast}
             deleteToast={deleteToast}
-            closeIcon={toastDefaults?.icons?.close}
+            closeIcon={toastDefaults?.closeIcon}
             closeButtonAriaLabel={closeButtonAriaLabel}
+            defaultActionButtonSx={toastDefaults?.[severity]?.actionButtonSx}
+            defaultCloseButtonSx={toastDefaults?.[severity]?.closeButtonSx}
           />
         }
       >
         <Stack direction="row" gap={1}>
           {(toast.promise || toast.type === "loading") &&
-            toastDefaults?.icons?.loading}
+            toastDefaults?.loading?.icon}
           {toast.title && <AlertTitle>{toast.title}</AlertTitle>}
         </Stack>
         <div data-content="">
@@ -460,11 +369,7 @@ export const Toast = ({
             <div data-description="">
               {typeof toast.description === "string" ? (
                 <Typography
-                  sx={[
-                    ...(Array.isArray(toastDefaults?.descriptionSx)
-                      ? toastDefaults?.descriptionSx
-                      : [toastDefaults?.descriptionSx]),
-                  ]}
+                  sx={formatSx(toastDefaults?.[severity]?.descriptionSx)}
                 >
                   {toast.description}
                 </Typography>
