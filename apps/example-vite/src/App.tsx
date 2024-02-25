@@ -20,7 +20,7 @@ function App() {
         </Button>
         <Button
           onClick={() => {
-            const prom = new Promise((resolve, reject) => {
+            const prom = new Promise((resolve) => {
               setTimeout(() => {
                 resolve("Success");
               }, 3000);
@@ -36,7 +36,7 @@ function App() {
         </Button>
         <Button
           onClick={() => {
-            const prom = new Promise((resolve, reject) => {
+            const prom = new Promise((_resolve, reject) => {
               setTimeout(() => {
                 reject("Error");
               }, 3000);
