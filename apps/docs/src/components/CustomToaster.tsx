@@ -7,12 +7,16 @@ const CustomToaster = (props: CustomToasterProps) => {
   return (
     <Toaster
       {...props}
-      closeIcon={
-        <Icon sx={{ width: 24, height: 24 }}>
-          <CloseIcon />
-        </Icon>
-      }
-      loadingIcon={<CircularProgress size={20} />}
+      toastOptions={{
+        closeIcon: (
+          <Icon sx={{ width: 24, height: 24 }}>
+            <CloseIcon />
+          </Icon>
+        ),
+        loading: {
+          icon: <CircularProgress size={20} color="secondary" />,
+        },
+      }}
     />
   );
 };

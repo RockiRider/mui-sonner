@@ -3,18 +3,17 @@ import { AppProps } from "next/app";
 import { AppCacheProvider } from "@mui/material-nextjs/v14-pagesRouter";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import getLPTheme from "@styles/dark";
+import getProTheme from "@styles/themes/pro";
+import defaultTheme from "@styles/themes/default";
 import { PaletteMode } from "@mui/material";
 import { useState } from "react";
 import CustomToaster from "@components/CustomToaster";
-
-const defaultTheme = createTheme({});
 
 export default function MyApp(props: AppProps) {
   const { Component, pageProps } = props;
   const [mode, setMode] = useState<PaletteMode>("dark");
   const [showCustomTheme, setShowCustomTheme] = useState(true);
-  const customTheme = createTheme(getLPTheme(mode));
+  const customTheme = createTheme(getProTheme(mode));
 
   const toggleColorMode = () => {
     setMode((prev) => (prev === "dark" ? "light" : "dark"));

@@ -1,5 +1,7 @@
 import Link from "@components/Link";
-import { Card, Stack, Typography } from "@mui/material";
+import { Button, Card, Stack, Typography } from "@mui/material";
+import { toast } from "mui-sonner";
+import NextLink from "next/link";
 
 const Intro = () => {
   return (
@@ -18,13 +20,33 @@ const Intro = () => {
         <Typography variant="h4" component="h1">
           MUI-Sonner
         </Typography>
-        <Typography variant="h5" component="h2">
+        <Typography variant="h6" component="h2">
           An opinionated toast library for Material UI and React
         </Typography>
         <Typography variant="body1" component="p">
           Based on the original{" "}
           <Link href="https://sonner.emilkowal.ski/">sonner</Link>
         </Typography>
+        <Stack direction="row" gap={2}>
+          <Button
+            variant="contained"
+            onClick={() =>
+              toast("MUI Sonner", {
+                description: "A toast library for MUI & React.",
+                // showIcon: false,
+                icon: "🚀",
+              })
+            }
+          >
+            Render a Toast
+          </Button>
+          <NextLink href="https://github.com/RockiRider/mui-sonner">
+            <Button variant="outlined">Github</Button>
+          </NextLink>
+        </Stack>
+        <Link href="/getting-started">
+          <Typography>Documentation</Typography>
+        </Link>
       </Stack>
     </Stack>
   );

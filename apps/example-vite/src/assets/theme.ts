@@ -1,3 +1,11 @@
 import { createTheme } from "@mui/material";
 
-export const appTheme = createTheme();
+export const appTheme = createTheme({
+  components: {
+    MuiButton: {
+      defaultProps: {
+        variant: "contained",
+      },
+    },
+  },
+});

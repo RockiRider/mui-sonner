@@ -32,6 +32,7 @@ export type ToastT = {
   variant?: ToastVariant;
   type?: ToastTypes;
   icon?: ReactNode;
+  hideIcon?: boolean;
   closeButton?: boolean;
   dismissible?: boolean;
   description?: ReactNode;
@@ -55,11 +56,7 @@ export type ToasterProps = {
   toastOptions?: ToastOptions;
   offset?: string | number;
   dir?: "rtl" | "ltr" | "auto";
-  loadingIcon?: ReactNode;
-  closeIcon?: ReactNode;
   containerAriaLabel?: string;
-  alertSx?: SxProps<Theme>;
-  closeButtonSx?: SxProps<Theme>;
 };
 
 export type Position =
@@ -76,9 +73,20 @@ export interface HeightT {
   position: Position;
 }
 
+type VariantOptions = {
+  icon: ReactNode;
+  closeButtonSx?: SxProps<Theme>;
+  actionButtonSx?: SxProps<Theme>;
+  descriptionSx?: SxProps<Theme>;
+};
+
 export type ToastOptions = {
+  [key in ToastTypes]?: VariantOptions;
+} & {
   duration?: number;
   closeButton?: boolean;
+  closeIcon?: ReactNode;
+  alertSx?: SxProps<Theme>;
 };
 
 export enum SwipeStateTypes {

@@ -1,0 +1,155 @@
+import { toast } from 'mui-sonner';
+
+# Toast()
+
+Use it to render a toast. You can call it from anywhere, even outside of React.
+
+## Rendering the toast
+
+You can call it with just a string.
+
+```jsx
+import { toast } from 'mui-sonner';
+
+toast('Hello World!');
+```
+
+Or provide an object as the second argument with more options. They will overwrite the options passed to [`<Toaster />`](/toaster) if you have provided any.
+
+```jsx
+import { toast } from 'mui-sonner';
+
+toast('My toast', {
+  description: 'My description',
+  duration: Infinity,
+  icon: <MyIcon />,
+  closeButton: true,
+});
+```
+
+## Creating toasts
+
+### Success
+
+Renders a checkmark icon in front of the message.
+
+```jsx
+toast.success('My success toast');
+```
+
+### Error
+
+Renders an error icon in front of the message.
+
+```jsx
+toast.error('My error toast');
+```
+
+### Action
+
+Renders a primary button, clicking it will close the toast and run the callback passed via `onClick`. You can prevent the toast from closing by calling `event.preventDefault()` in the `onClick` callback.
+
+```jsx
+toast('My action toast', {
+  action: {
+    label: 'Action',
+    onClick: () => console.log('Action!'),
+  },
+});
+```
+
+
+### Promise
+
+Starts in a loading state and will update automatically after the promise resolves or fails.
+You can pass a function to the success/error messages to incorporate the result/error of the promise.
+
+```jsx
+toast.promise(myPromise, {
+  loading: 'Loading...',
+  success: (data) => {
+    return `${data.name} toast has been added`;
+  },
+  error: 'Error',
+});
+```
+
+### Loading
+
+Renders a toast with a loading spinner. Useful when you want to handle various states yourself instead of using a promise toast.
+
+```jsx
+toast.loading('Loading data');
+```
+
+### Dynamic Position
+
+You can change the position of the toast dynamically by passing a `position` prop to the toast
+function. It will not affect the positioning of other toasts.
+
+```jsx
+// Available positions:
+// top-left, top-center, top-right, bottom-left, bottom-center, bottom-right
+toast('Hello World', {
+  position: 'top-center',
+});
+```
+
+## Other
+
+### Updating toasts
+
+You can update a toast by using the `toast` function and passing it the id of the toast you want to update, the rest stays the same.
+
+```jsx
+const toastId = toast('mui-sonner');
+
+toast.success('Toast has been updated', {
+  id: toastId,
+});
+```
+
+### On Close Callback
+
+You can pass `onDismiss` and `onAutoClose` callbacks to each toast. `onDismiss` gets fired when either the close button gets clicked or the toast is swiped. `onAutoClose` fires when the toast disappears automatically after it's timeout (`duration` prop).
+
+```jsx
+toast('Event has been created', {
+  onDismiss: (t) => console.log(`Toast with id ${t.id} has been dismissed`),
+  onAutoClose: (t) => console.log(`Toast with id ${t.id} has been closed automatically`),
+});
+```
+
+### Dismissing toasts programmatically
+
+To remove a toast programmatically use `toast.dismiss(id)`. The `toast()` function return the id of the toast.
+
+```jsx
+const toastId = toast('Event has been created');
+
+toast.dismiss(toastId);
+```
+
+You can also dismiss all toasts at once by calling `toast.dismiss()` without an id.
+
+```jsx
+toast.dismiss();
+```
+
+## API Reference
+
+| Property           |                                              Description                                               |        Default |
+| :----------------- | :----------------------------------------------------------------------------------------------------: | -------------: |
+| description        |                           Toast's description, renders underneath the title.                           |            `-` |
+| closeButton        |                                          Adds a close button.                                          |        `false` |
+| invert             |                                Dark toast in light mode and vice versa.                                |        `false` |
+| important          |                        Control the sensitivity of the toast for screen readers                         |        `false` |
+| duration           |            Time in milliseconds that should elapse before automatically closing the toast.             |         `4000` |
+| position           |                                         Position of the toast.                                         | `bottom-right` |
+| dismissible        |                     If `false`, it'll prevent the user from dismissing the toast.                      |         `true` |
+| icon               |                      Icon displayed in front of toast's text, aligned vertically.                      |            `-` |
+| action             |                      Renders a primary button, clicking it will close the toast.                       |            `-` |
+| id                 |                                        Custom id for the toast.                                        |            `-` |
+| onDismiss          |       The function gets called when either the close button is clicked, or the toast is swiped.        |            `-` |
+| onAutoClose        | Function that gets called when the toast disappears automatically after it's timeout (duration` prop). |            `-` |
+| actionButtonSx     |                                      Styles for the action button                                      |           `{}` |

@@ -1,0 +1,72 @@
+import { Tab, Tabs, Cards, Card, Steps } from "nextra-theme-docs";
+import { toast } from "mui-sonner";
+
+# Getting Started
+
+MUI Sonner is an opinionated toast component for MUI & React.
+
+<Steps>
+### Install
+
+<Tabs items={['pnpm', 'npm', 'yarn', 'bun']}>
+  <Tab>
+    ```bash
+    pnpm i mui-sonner
+    ```
+
+  </Tab>
+  <Tab>
+    ```bash
+    npm i mui-sonner
+    ```
+  </Tab>
+  <Tab>
+    ```bash
+    yarn add mui-sonner
+    ```
+  </Tab>
+    <Tab>
+    ```bash
+    bun add mui-sonner
+    ```
+  </Tab>
+</Tabs>
+
+### Add Toaster to your app
+
+It can be placed anywhere, but it's recommended to place higher up the component tree.
+
+```tsx
+import { Toaster } from "mui-sonner";
+
+export default function App({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+        <Toaster />
+      </body>
+    </html>
+  );
+}
+```
+
+### Render a toast
+
+```tsx
+import { toast } from "mui-sonner";
+
+const MyToast = () => {
+    return (
+    <button onClick={() => toast("Hello World")}>
+      Render my toast
+    </button>
+    )
+}
+```
+
+</Steps>

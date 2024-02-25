@@ -1,4 +1,3 @@
-import CustomToaster from "@components/CustomToaster";
 import FuncDisplay, { FuncData } from "@components/FuncDisplay";
 import { Button, Stack, Typography } from "@mui/material";
 import { toast } from "mui-sonner";
@@ -76,6 +75,27 @@ const TYPES_DEMO: FuncData[] = [
     }
   },
 })`,
+  },
+  {
+    component: (
+      <Button
+        variant="contained"
+        onClick={() => {
+          toast.promise(new Promise((resolve) => setTimeout(resolve, 2000)), {
+            loading: "Loading...",
+            success: "Promise Success!",
+            error: "Promise rejected",
+          });
+        }}
+      >
+        Promise
+      </Button>
+    ),
+    codeString: `toast.promise(new Promise((resolve) => setTimeout(resolve, 2000)), {
+      loading: "Loading...",
+      success: "Promise resolved",
+      error: "Promise rejected",
+  });`,
   },
 ];
 

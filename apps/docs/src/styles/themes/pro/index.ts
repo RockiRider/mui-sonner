@@ -109,7 +109,6 @@ const getDesignTokens = (mode: PaletteMode) => ({
     },
   },
   typography: {
-    fontFamily: ['"Inter", "sans-serif"'].join(","),
     h1: {
       fontSize: 60,
       fontWeight: 600,
@@ -158,7 +157,7 @@ const getDesignTokens = (mode: PaletteMode) => ({
   },
 });
 
-export default function getLPTheme(mode: PaletteMode): ThemeOptions {
+export default function getProTheme(mode: PaletteMode): ThemeOptions {
   return {
     ...getDesignTokens(mode),
     typography: {
