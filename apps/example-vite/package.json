@@ -18,7 +18,8 @@
     "@tanstack/react-router": "^1.17.4",
     "mui-sonner": "*",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@tanstack/router-vite-plugin": "^1.16.5",

@@ -19,7 +19,7 @@ import {
   ToastT,
   HeightT,
   ToastToDismiss,
-  Position,
+  ToastPosition,
   ToasterProps,
 } from "./types";
 import "./style.css";
@@ -59,7 +59,9 @@ export const Toaster = ({
         [position].concat(
           toasts
             .map((toast) => toast.position)
-            .filter((position): position is Position => position !== undefined)
+            .filter(
+              (position): position is ToastPosition => position !== undefined
+            )
         )
       )
     );

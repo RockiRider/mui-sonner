@@ -1,16 +1,40 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { Stack, Icon, CircularProgress, Button } from "@mui/material";
 import { Close as CloseIcon } from "@mui/icons-material";
-import { toast, Toaster } from "mui-sonner";
+import { toast, Toaster, ToastPosition } from "mui-sonner";
+import { z } from "zod";
 
-export const Route = createLazyFileRoute("/")({
+type PositionParams = {
+  position: ToastPosition | undefined;
+};
+
+export const Route = createFileRoute("/")({
   component: Index,
+  validateSearch: (search: Record<string, unknown>): PositionParams => {
+    return {
+      position: search.position
+        ? z
+            .enum([
+              "top-left",
+              "top-center",
+              "top-right",
+              "bottom-left",
+              "bottom-center",
+              "bottom-right",
+            ])
+            .parse(search.position as string)
+        : undefined,
+    };
+  },
 });
 
 function Index() {
+  const { position } = Route.useSearch();
+
   return (
     <Stack gap={2} alignItems="center" width={1}>
       <Toaster
+        position={position}
         toastOptions={{
           closeIcon: (
             <Icon sx={{ width: 24, height: 24 }} data-testid="close_icon">
