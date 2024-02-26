@@ -11,6 +11,7 @@ test.describe("Basic functionality", () => {
   }) => {
     await page.getByTestId("basic_btn").click();
     await expect(page.locator("[data-sonner-toast]")).toHaveCount(1);
+    await page.waitForTimeout(2500);
     await expect(page.locator("[data-sonner-toast]")).toHaveCount(0);
   });
 
@@ -82,9 +83,9 @@ test.describe("Basic functionality", () => {
     await expect(page.locator("[data-sonner-toast]")).toHaveCount(1);
   });
 
-  test.skip("toast is removed after swiping up", async ({ page }) => {
+  test("toast is removed after swiping up", async ({ page }) => {
     await page.goto("/?position=top-left");
-    await page.getByTestId("default-button").click();
+    await page.getByTestId("basic_btn").click();
     await page.hover("[data-sonner-toast]");
     await page.mouse.down();
     await page.mouse.move(0, -800);
@@ -93,17 +94,17 @@ test.describe("Basic functionality", () => {
   });
 
   test.skip("toast is not removed when hovered", async ({ page }) => {
-    await page.getByTestId("default-button").click();
+    await page.getByTestId("basic_btn").click();
     await page.hover("[data-sonner-toast]");
     const timeout = new Promise((resolve) => setTimeout(resolve, 5000));
     await timeout;
     await expect(page.locator("[data-sonner-toast]")).toHaveCount(1);
   });
 
-  test.skip("toast is not removed if duration is set to infinity", async ({
+  test("toast is not removed if duration is set to infinity", async ({
     page,
   }) => {
-    await page.getByTestId("infinity-toast").click();
+    await page.getByTestId("infinite_btn").click();
     await page.hover("[data-sonner-toast]");
     const timeout = new Promise((resolve) => setTimeout(resolve, 5000));
     await timeout;
@@ -118,17 +119,17 @@ test.describe("Basic functionality", () => {
     await expect(page.locator("[data-sonner-toast]")).toHaveCount(1);
   });
 
-  test.skip("toast's auto close callback gets executed correctly", async ({
+  test("toast's auto close callback gets executed correctly", async ({
     page,
   }) => {
-    await page.getByTestId("auto-close-toast-callback").click();
-    await expect(page.getByTestId("auto-close-el")).toHaveCount(1);
+    await page.getByTestId("auto_close_call_back_btn").click();
+    await expect(page.getByTestId("auto_close_el")).toHaveCount(1);
   });
 
   test.skip("toast's dismiss callback gets executed correctly", async ({
     page,
   }) => {
-    await page.getByTestId("dismiss-toast-callback").click();
+    await page.getByTestId("dismiss_toast_btn").click();
     const toast = page.locator("[data-sonner-toast]");
     const dragBoundingBox = await toast.boundingBox();
 
@@ -157,34 +158,34 @@ test.describe("Basic functionality", () => {
     await expect(page.getByTestId("custom")).toBeFocused();
   });
 
-  test.skip("toaster's dir prop is reflected correctly", async ({ page }) => {
+  test("toaster's dir prop is reflected correctly", async ({ page }) => {
     await page.goto("/?dir=rtl");
-    await page.getByTestId("default-button").click();
+    await page.getByTestId("basic_btn").click();
     await expect(page.locator("[data-sonner-toaster]")).toHaveAttribute(
       "dir",
       "rtl"
     );
   });
 
-  test.skip("toaster respects the HTML's dir attribute", async ({ page }) => {
+  test("toaster respects the HTML's dir attribute", async ({ page }) => {
     await page.evaluate(() => {
       document.documentElement.setAttribute("dir", "rtl");
     });
-    await page.getByTestId("default-button").click();
+    await page.getByTestId("basic_btn").click();
     await expect(page.locator("[data-sonner-toaster]")).toHaveAttribute(
       "dir",
       "rtl"
     );
   });
 
-  test.skip("toaster respects its own dir attribute over HTML's", async ({
+  test("toaster respects its own dir attribute over HTML's", async ({
     page,
   }) => {
     await page.goto("/?dir=ltr");
     await page.evaluate(() => {
       document.documentElement.setAttribute("dir", "rtl");
     });
-    await page.getByTestId("default-button").click();
+    await page.getByTestId("basic_btn").click();
     await expect(page.locator("[data-sonner-toaster]")).toHaveAttribute(
       "dir",
       "ltr"

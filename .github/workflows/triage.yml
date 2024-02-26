@@ -1,0 +1,21 @@
+name: PR Workflow
+
+on:
+  pull_request:
+    types: [opened, ready_for_review]
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Build Mui-Sonner
+        run: npm run build
+      - name: Build example-vite
+        run: npm run v:build
+      - name: Run tests
+        run: npm run test
