@@ -1,4 +1,4 @@
-import { Button, SxProps, IconButton, Theme } from "@mui/material";
+import { Button, SxProps, IconButton, Theme, Stack } from "@mui/material";
 import React, { ReactNode } from "react";
 import { ToastT } from ".";
 import { ToastAction } from "./types";
@@ -76,7 +76,23 @@ const AlertAction = ({
   defaultCloseButtonSx,
   defaultActionButtonSx,
 }: AlertActionProps) => {
-  if (toast.action) {
+  if (toast.action && toast.closeButton) {
+    return (
+      <Stack direction="row" gap={1}>
+        <ActionButton
+          action={toast.action}
+          deleteToast={deleteToast}
+          actionButtonSx={defaultActionButtonSx}
+        />
+        <CloseButton
+          closeButtonAriaLabel={closeButtonAriaLabel}
+          deleteToast={deleteToast}
+          closeIcon={closeIcon}
+          closeButtonSx={defaultCloseButtonSx}
+        />
+      </Stack>
+    );
+  } else if (toast.action) {
     return (
       <ActionButton
         action={toast.action}
