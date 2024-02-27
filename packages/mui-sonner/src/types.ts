@@ -43,11 +43,11 @@ export type ToastT = {
   onDismiss?: (toast: ToastT) => void;
   onAutoClose?: (toast: ToastT) => void;
   promise?: PromiseT;
-  position?: Position;
+  position?: ToastPosition;
 };
 
 export type ToasterProps = {
-  position?: Position;
+  position?: ToastPosition;
   hotkey?: string[];
   expand?: boolean;
   duration?: number;
@@ -59,7 +59,7 @@ export type ToasterProps = {
   containerAriaLabel?: string;
 };
 
-export type Position =
+export type ToastPosition =
   | "top-left"
   | "top-right"
   | "bottom-left"
@@ -70,7 +70,7 @@ export type Position =
 export interface HeightT {
   height: number;
   toastId: number | string;
-  position: Position;
+  position: ToastPosition;
 }
 
 type VariantOptions = {

@@ -5,6 +5,7 @@
     "build": "turbo build --filter=mui-sonner --force",
     "v:dev": "turbo dev --filter=example-vite",
     "v:build": "turbo build --filter=example-vite --force",
+    "v:preview": "turbo preview --filter=example-vite",
     "docs:dev": "turbo dev --filter=docs",
     "docs:build": "turbo build --filter=docs",
     "docs:preview": "turbo preview --filter=docs",

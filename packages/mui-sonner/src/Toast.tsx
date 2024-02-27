@@ -12,7 +12,7 @@ import {
 import {
   ToastT,
   HeightT,
-  Position,
+  ToastPosition,
   ToastSeverity,
   ToastVariant,
   ToastColor,
@@ -37,7 +37,7 @@ interface ToastProps {
   setHeights: Dispatch<SetStateAction<HeightT[]>>;
   removeToast: (toast: ToastT) => void;
   gap?: number;
-  position: Position;
+  position: ToastPosition;
   visibleToasts: number;
   expandByDefault: boolean;
   interacting: boolean;
