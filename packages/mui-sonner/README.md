@@ -2,6 +2,14 @@
 
 If you are not using MUI, you should use [sonner](https://www.npmjs.com/package/sonner) directly.
 
+## Demo
+
+[View demo](https://mui-sonner.tsotne.co.uk/)
+
+## Documentation
+
+[View the documentation](https://mui-sonner.tsotne.co.uk/getting-started)
+
 ## Features
 
 - **Avoids Context**: Like [sonner](https://www.npmjs.com/package/sonner), it doesn't use context.
@@ -28,7 +36,3 @@ function App() {
   );
 }
 ```
-
-## Documentation
-
-Coming soon
